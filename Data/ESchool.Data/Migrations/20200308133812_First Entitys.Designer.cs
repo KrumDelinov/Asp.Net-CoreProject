@@ -4,14 +4,16 @@ using ESchool.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ESchool.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200308133812_First Entitys")]
+    partial class FirstEntitys
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -203,17 +205,12 @@ namespace ESchool.Data.Migrations
                     b.Property<int>("StudentCount")
                         .HasColumnType("int");
 
-                    b.Property<int>("TeacherId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("Year")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
-
-                    b.HasIndex("TeacherId");
 
                     b.ToTable("Classrooms");
                 });
@@ -297,21 +294,6 @@ namespace ESchool.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Parents");
-                });
-
-            modelBuilder.Entity("ESchool.Data.Models.ParentStudent", b =>
-                {
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ParentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("StudentId", "ParentId");
-
-                    b.HasIndex("ParentId");
-
-                    b.ToTable("ParentsStudents");
                 });
 
             modelBuilder.Entity("ESchool.Data.Models.Setting", b =>
@@ -590,15 +572,6 @@ namespace ESchool.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ESchool.Data.Models.Classroom", b =>
-                {
-                    b.HasOne("ESchool.Data.Models.Teacher", "MainTeacher")
-                        .WithMany()
-                        .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("ESchool.Data.Models.Exam", b =>
                 {
                     b.HasOne("ESchool.Data.Models.Student", "Student")
@@ -619,21 +592,6 @@ namespace ESchool.Data.Migrations
                     b.HasOne("ESchool.Data.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("ESchool.Data.Models.ParentStudent", b =>
-                {
-                    b.HasOne("ESchool.Data.Models.Parent", "Parent")
-                        .WithMany("ParentStudents")
-                        .HasForeignKey("ParentId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("ESchool.Data.Models.Student", "Student")
-                        .WithMany("StudentParents")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("ESchool.Data.Models.Student", b =>

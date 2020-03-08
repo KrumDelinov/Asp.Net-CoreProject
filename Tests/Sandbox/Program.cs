@@ -5,6 +5,7 @@
     using System.IO;
     using System.Threading.Tasks;
 
+    using CommandLine;
     using ESchool.Data;
     using ESchool.Data.Common;
     using ESchool.Data.Common.Repositories;
@@ -13,9 +14,6 @@
     using ESchool.Data.Seeding;
     using ESchool.Services.Data;
     using ESchool.Services.Messaging;
-
-    using CommandLine;
-
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
