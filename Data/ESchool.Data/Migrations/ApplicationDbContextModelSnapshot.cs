@@ -397,7 +397,7 @@ namespace ESchool.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ClassroomId")
+                    b.Property<int?>("ClassroomId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
@@ -651,11 +651,9 @@ namespace ESchool.Data.Migrations
 
             modelBuilder.Entity("ESchool.Data.Models.Subject", b =>
                 {
-                    b.HasOne("ESchool.Data.Models.Classroom", "Classroom")
+                    b.HasOne("ESchool.Data.Models.Classroom", null)
                         .WithMany("Subjects")
-                        .HasForeignKey("ClassroomId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("ClassroomId");
                 });
 
             modelBuilder.Entity("ESchool.Data.Models.Teacher", b =>
