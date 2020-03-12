@@ -24,7 +24,5 @@
         public virtual Subject Subject { get; set; }
 
         public virtual ApplicationUser User { get; set; }
-
-        
     }
 }

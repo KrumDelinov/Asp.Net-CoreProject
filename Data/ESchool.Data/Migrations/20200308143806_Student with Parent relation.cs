@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace ESchool.Data.Migrations
+﻿namespace ESchool.Data.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class StudentwithParentrelation : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

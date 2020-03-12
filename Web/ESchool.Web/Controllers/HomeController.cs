@@ -2,28 +2,30 @@
 {
     using System.Diagnostics;
     using System.Linq;
+
     using ESchool.Data;
+    using ESchool.Data.Common.Repositories;
+    using ESchool.Data.Models;
+    using ESchool.Services.Data;
+    using ESchool.Services.Mapping;
     using ESchool.Web.ViewModels;
     using ESchool.Web.ViewModels.Home;
     using Microsoft.AspNetCore.Mvc;
 
     public class HomeController : BaseController
     {
-        private readonly ApplicationDbContext dbContext;
+        private readonly IClassroomServices classroomsServices;
 
-        public HomeController(ApplicationDbContext dbContext)
+        public HomeController(IClassroomServices classroomsServices)
         {
-            this.dbContext = dbContext;
+            this.classroomsServices = classroomsServices;
         }
 
         public IActionResult Index()
         {
             var viewModels = new IndexViewModel();
-            var subjects = this.dbContext.Subjects.Select(x => new IndexSubjectViewModel
-            {
-                Description = x.Description,
-            }).ToList();
-            viewModels.Subjects = subjects;
+            var subjects = this.classroomsServices.GetAll<IndexClassroomViewModel>();
+            viewModels.Classrooms = subjects;
 
             return this.View(viewModels);
         }

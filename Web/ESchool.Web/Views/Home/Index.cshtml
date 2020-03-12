@@ -15,18 +15,26 @@
     <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">First</th>
+            <th scope="col">Класове</th>
+            <th scope="col">Брой ученици</th>
+            <th scope="col">Класен</th>
 
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in @Model.Subjects)
+        @foreach (var item in @Model.Classrooms)
         {
-            <tr>
-                <th scope="row">@(num++)</th>
-                <td>@item.Description</td>
+        <tr>
+            <th scope="row">@(num++)</th>
+            <td>
 
-            </tr>
+                <a href="@item.Description"></a>
+               
+            </td>
+            <td>@item.StudentsCount</td>
+            <td>@item.FullName</td>
+
+        </tr>
 
         }
 
