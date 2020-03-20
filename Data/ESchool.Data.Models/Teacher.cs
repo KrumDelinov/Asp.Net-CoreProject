@@ -15,7 +15,7 @@
         [Required]
         public string LastName { get; set; }
 
-        public bool HasClassroom { get; set; }
+        public bool HasClassroom { get; set; } = false;
 
         public string UserId { get; set; }
 

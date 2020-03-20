@@ -19,9 +19,9 @@
 
         public virtual ApplicationUser User { get; set; }
 
-        public int ClassroomId { get; set; }
+        public int GradeId { get; set; }
 
-        public virtual Classroom Classroom { get; set; }
+        public virtual Grade Grade { get; set; }
 
         public virtual ICollection<Attendance> Attendances { get; set; } = new HashSet<Attendance>();
 

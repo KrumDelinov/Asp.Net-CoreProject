@@ -16,7 +16,7 @@
                 return;
             }
 
-            var subjects = new List<string> { "Biology", "Math", "Geography" };
+            List<string> subjects = new List<string> { "Biology", "Mathematics", "Geography", "English", "History", "Information Technology", "Art" };
 
             foreach (var item in subjects)
             {

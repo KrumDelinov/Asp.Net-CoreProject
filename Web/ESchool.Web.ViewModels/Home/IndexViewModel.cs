@@ -4,6 +4,6 @@
 
     public class IndexViewModel
     {
-        public IEnumerable<IndexClassroomViewModel> Classrooms { get; set; }
+        public IEnumerable<IndexGradeViewModel> Classrooms { get; set; }
     }
 }

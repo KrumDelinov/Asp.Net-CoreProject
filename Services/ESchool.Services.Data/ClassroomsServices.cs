@@ -10,9 +10,9 @@
 
     public class ClassroomsServices : IClassroomServices
     {
-        private readonly IDeletableEntityRepository<Classroom> classroomsRepository;
+        private readonly IDeletableEntityRepository<Grade> classroomsRepository;
 
-        public ClassroomsServices(IDeletableEntityRepository<Classroom> classroomsRepository)
+        public ClassroomsServices(IDeletableEntityRepository<Grade> classroomsRepository)
         {
             this.classroomsRepository = classroomsRepository;
         }

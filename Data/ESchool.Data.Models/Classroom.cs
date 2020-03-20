@@ -8,18 +8,12 @@
 
     public class Classroom : BaseDeletableModel<int>
     {
-        public string Description { get; set; }
-
-        public DateTime Year { get; set; }
-
-        public int StudentCount { get; set; } = 25;
+        public string NumberDescription { get; set; }
 
         public int TeacherId { get; set; }
 
-        public virtual Teacher MainTeacher { get; set; }
+        public virtual Teacher Teacher { get; set; }
 
-        public virtual ICollection<Student> Students { get; set; } = new HashSet<Student>();
-
-        public ICollection<Subject> Subjects { get; set; } = new HashSet<Subject>();
+        public ICollection<Grade> Grades { get; set; } = new HashSet<Grade>();
     }
 }
