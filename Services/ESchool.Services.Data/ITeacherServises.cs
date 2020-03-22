@@ -13,6 +13,10 @@
 
         IEnumerable<T> GetAll<T>();
 
-        Teacher Teacher(int id);
+        Task<int> SetClassroomToTeacher(int id);
+
+        Teacher GetTeacher(int id);
+
+        T Teacher<T>(int id);
     }
 }

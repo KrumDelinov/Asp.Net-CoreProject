@@ -63,7 +63,7 @@
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
-            services.AddTransient<IClassroomServices, ClassroomsServices>();
+            services.AddTransient<IClassroomsServices, ClassroomsServices>();
             services.AddTransient<ITeacherServises, TeacherServises>();
             services.AddTransient<ISubjectsServices, SubjectsServices>();
         }

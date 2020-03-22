@@ -42,9 +42,24 @@
             return this.techerRepository.All().Count();
         }
 
-        public Teacher Teacher(int id)
+        public Teacher GetTeacher(int id)
         {
             var teacher = this.techerRepository.All().Where(x => x.Id == id).FirstOrDefault();
+
+            return teacher;
+        }
+
+        public async Task<int> SetClassroomToTeacher(int id)
+        {
+            var teacher = this.techerRepository.All().Where(x => x.Id == id).FirstOrDefault();
+            teacher.HasClassroom = true;
+            await this.techerRepository.SaveChangesAsync();
+            return teacher.Id;
+        }
+
+        public T Teacher<T>(int id)
+        {
+            var teacher = this.techerRepository.All().Where(x => x.Id == id).To<T>().FirstOrDefault();
 
             return teacher;
         }

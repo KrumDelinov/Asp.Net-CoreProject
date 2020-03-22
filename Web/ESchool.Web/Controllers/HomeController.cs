@@ -14,9 +14,9 @@
 
     public class HomeController : BaseController
     {
-        private readonly IClassroomServices classroomsServices;
+        private readonly IClassroomsServices classroomsServices;
 
-        public HomeController(IClassroomServices classroomsServices)
+        public HomeController(IClassroomsServices classroomsServices)
         {
             this.classroomsServices = classroomsServices;
         }

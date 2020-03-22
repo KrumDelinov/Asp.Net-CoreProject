@@ -66,15 +66,7 @@
 
         public IActionResult Details(int id)
         {
-            var teacher = this.teacherServises.Teacher(id);
-            var viewModel = new TeacherViewModel
-            {
-                FirstName = teacher.FirstName,
-                LastName = teacher.LastName,
-                Id = teacher.Id,
-
-                // SubjectDescriptin = teacher.Subject.Description,
-            };
+            TeacherViewModel viewModel = this.teacherServises.Teacher<TeacherViewModel>(id);
 
             return this.View(viewModel);
         }
