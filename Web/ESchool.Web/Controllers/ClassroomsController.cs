@@ -1,14 +1,12 @@
-﻿using ESchool.Services.Data;
-using ESchool.Web.ViewModels.Classrooms;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace ESchool.Web.Controllers
+﻿namespace ESchool.Web.Controllers
 {
+    using System.Threading.Tasks;
+
+    using ESchool.Services.Data;
+    using ESchool.Web.ViewModels.Classrooms;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+
     public class ClassroomsController : BaseController
     {
         private readonly IClassroomsServices classroomsServices;

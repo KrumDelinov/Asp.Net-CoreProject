@@ -51,8 +51,8 @@
                 return this.View(inputModel);
             }
 
-            var user = await this.userManager.GetUserAsync(this.User);
-            var teacherId = await this.teacherServises.CreateAsync(inputModel.FirstName, inputModel.LastName, user.Id, inputModel.SubjectId);
+            //var user = await this.userManager.GetUserAsync(this.User);
+            var teacherId = await this.teacherServises.CreateAsync(inputModel.FirstName, inputModel.LastName, inputModel.SubjectId);
 
             return this.RedirectToAction("Details", new { id = teacherId });
         }
