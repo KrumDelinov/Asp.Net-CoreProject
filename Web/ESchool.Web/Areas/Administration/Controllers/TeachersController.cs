@@ -11,6 +11,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
 
     public class TeachersController : AdministrationController
     {
@@ -75,6 +76,65 @@
             TeacherViewModel viewModel = this.teacherServises.Teacher<TeacherViewModel>(id);
 
             return this.View(viewModel);
+        }
+
+
+        // GET: Administration/Students/Edit/5
+        public IActionResult Edit(int id)
+        {
+            if (id == null)
+            {
+                return this.NotFound();
+            }
+
+            //var subjects = this.subjectsServices.GetAll<SubjectsDropDownViewModel>();
+            //var viewModel = new TeacherCreateInputModel();
+            //viewModel.Subjects = subjects;
+
+            //var viewModel = new TeacherViewModel();
+            //return this.View(viewModel);
+
+            TeacherViewModel viewModel = this.teacherServises.Teacher<TeacherViewModel>(id);
+
+            return this.View(viewModel);
+        }
+
+        //POST: Administration/Students/Edit/5
+
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, TeacherViewModel viewModel)
+        {
+            if (id != viewModel.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    this.teacherServises.UpdateTeacher(viewModel.Id, viewModel.FirstName, viewModel.LastName);
+
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (viewModel.Id == null)
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(All));
+            }
+
+            return this.View(viewModel);
+         
         }
     }
 }

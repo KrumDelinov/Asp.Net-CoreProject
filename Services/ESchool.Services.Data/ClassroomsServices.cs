@@ -36,5 +36,19 @@
         {
             return this.classroomsRepository.All().To<T>().ToList();
         }
+
+        public T Classroom<T>(int id)
+        {
+            var classroom = this.classroomsRepository.All().Where(x => x.Id == id).To<T>().FirstOrDefault();
+
+            return classroom;
+        }
+
+        public Classroom GetClassroom(int id)
+        {
+            var classroom = this.classroomsRepository.All().Where(x => x.Id == id).FirstOrDefault();
+
+            return classroom;
+        }
     }
 }

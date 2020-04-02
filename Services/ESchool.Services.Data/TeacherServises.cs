@@ -25,7 +25,7 @@
                 LastName = lastName,
                 SubjectId = subjectId,
             };
-
+            
             await this.techerRepository.AddAsync(teacher);
             await this.techerRepository.SaveChangesAsync();
             return teacher.Id;
@@ -61,6 +61,17 @@
             var teacher = this.techerRepository.All().Where(x => x.Id == id).To<T>().FirstOrDefault();
 
             return teacher;
+        }
+
+        public void UpdateTeacher(int id, string firstName, string lastName)
+        {
+            var teacher = this.techerRepository.All().Where(x => x.Id == id).FirstOrDefault();
+
+            teacher.FirstName = firstName;
+            teacher.LastName = lastName;
+            //teacher.ModifiedOn = Get
+            this.techerRepository.Update(teacher);
+            this.techerRepository.SaveChangesAsync();
         }
     }
 }

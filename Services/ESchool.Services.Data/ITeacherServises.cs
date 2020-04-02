@@ -17,6 +17,8 @@
 
         Teacher GetTeacher(int id);
 
+        void UpdateTeacher(int id, string firstName, string lastName);
+
         T Teacher<T>(int id);
     }
 }

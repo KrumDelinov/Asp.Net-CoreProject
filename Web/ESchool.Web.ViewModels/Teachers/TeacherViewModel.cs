@@ -12,5 +12,7 @@
         public string LastName { get; set; }
 
         public string SubjectDescription { get; set; }
+
+        public string UserId { get; set; }
     }
 }
