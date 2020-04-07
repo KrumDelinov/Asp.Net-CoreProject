@@ -4,9 +4,11 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using ESchool.Data;
     using ESchool.Data.Common.Repositories;
     using ESchool.Data.Models;
     using ESchool.Services.Mapping;
+    using ESchool.Web.ViewModels.Teachers;
 
     public class TeacherServises : ITeacherServises
     {
@@ -25,11 +27,13 @@
                 LastName = lastName,
                 SubjectId = subjectId,
             };
-            
+
             await this.techerRepository.AddAsync(teacher);
             await this.techerRepository.SaveChangesAsync();
             return teacher.Id;
         }
+
+    
 
         public IEnumerable<T> GetAll<T>()
         {
@@ -63,15 +67,18 @@
             return teacher;
         }
 
-        public void UpdateTeacher(int id, string firstName, string lastName)
+        public async Task UpdateTeacher(Teacher teacher)
         {
-            var teacher = this.techerRepository.All().Where(x => x.Id == id).FirstOrDefault();
-
-            teacher.FirstName = firstName;
-            teacher.LastName = lastName;
-            //teacher.ModifiedOn = Get
             this.techerRepository.Update(teacher);
-            this.techerRepository.SaveChangesAsync();
+            await this.techerRepository.SaveChangesAsync();
+
+        }
+
+        public async Task DeleteTeacher(Teacher teacher)
+        {
+            this.techerRepository.Delete(teacher);
+
+            await this.techerRepository.SaveChangesAsync();
         }
     }
 }

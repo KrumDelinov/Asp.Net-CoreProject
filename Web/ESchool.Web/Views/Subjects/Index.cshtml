@@ -1,17 +1,10 @@
-﻿@model ESchool.Web.ViewModels.Teachers.AllTeachersViewModel
+﻿@model IEnumerable<ESchool.Data.Models.Subject>
+
 @{
-    ViewData["Title"] = "All";
-    var userId = string.Empty;
-
-    bool isEmpty = Model.Teachers.Any(x => x.UserUserName == null);
-
-    if (isEmpty)
-    {
-        userId = "Empty";
-    }
+    ViewData["Title"] = "Index";
 }
 
-<h1>AllTeachers</h1>
+<h1>Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -20,55 +13,47 @@
     <thead>
         <tr>
             <th>
-                #
+                @Html.DisplayNameFor(model => model.Description)
             </th>
             <th>
-                Име
+                @Html.DisplayNameFor(model => model.IsDeleted)
             </th>
             <th>
-                Фамилия
+                @Html.DisplayNameFor(model => model.DeletedOn)
             </th>
             <th>
-                Предмет
+                @Html.DisplayNameFor(model => model.CreatedOn)
             </th>
             <th>
-                UserName
+                @Html.DisplayNameFor(model => model.ModifiedOn)
             </th>
-
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Teachers)
-        {
+@foreach (var item in Model) {
         <tr>
             <td>
-                @item.Id)
+                @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @item.FirstName
+                @Html.DisplayFor(modelItem => item.IsDeleted)
             </td>
             <td>
-                @item.LastName
+                @Html.DisplayFor(modelItem => item.DeletedOn)
             </td>
             <td>
-                @item.SubjectDescription
+                @Html.DisplayFor(modelItem => item.CreatedOn)
             </td>
-
             <td>
-                @(item.UserUserName == null ? "Empty" : item.UserUserName)
+                @Html.DisplayFor(modelItem => item.ModifiedOn)
             </td>
-
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
-        }
+}
     </tbody>
 </table>
-<div>
-    <a asp-controller="Dashboard" asp-action="Index">Back to Dashboard</a>
-</div>
-

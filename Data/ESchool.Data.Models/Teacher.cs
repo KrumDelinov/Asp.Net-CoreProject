@@ -9,6 +9,7 @@
 
     public class Teacher : BaseDeletableModel<int>
     {
+
         [Required]
         public string FirstName { get; set; }
 

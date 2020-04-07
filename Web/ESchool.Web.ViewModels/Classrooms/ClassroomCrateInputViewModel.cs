@@ -10,9 +10,12 @@
     {
         [Required]
         [Display(Name ="Room Number")]
-        public string NumberDescription { get; set; }
+        public int Number { get; set; }
 
-        [Required]
+        [Display(Name = "Cabinet Description")]
+        public string Description { get; set; }
+
+        //[Required]
         [Display(Name = "Teachers")]
         public int TeacherId { get; set; }
 

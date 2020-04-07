@@ -48,8 +48,4 @@
     <ProjectReference Include="..\ESchool.Web.Infrastructure\ESchool.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\ESchool.Web.ViewModels\ESchool.Web.ViewModels.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\Teachers2\" />
-  </ItemGroup>
 </Project>

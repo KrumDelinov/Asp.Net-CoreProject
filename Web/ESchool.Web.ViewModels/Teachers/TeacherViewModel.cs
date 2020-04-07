@@ -13,6 +13,6 @@
 
         public string SubjectDescription { get; set; }
 
-        public string UserId { get; set; }
+        public string UserUserName { get; set; }
     }
 }

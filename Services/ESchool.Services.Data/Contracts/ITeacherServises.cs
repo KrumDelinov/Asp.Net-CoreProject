@@ -17,7 +17,9 @@
 
         Teacher GetTeacher(int id);
 
-        void UpdateTeacher(int id, string firstName, string lastName);
+        Task UpdateTeacher(Teacher teacher);
+
+        Task DeleteTeacher(Teacher teacher);
 
         T Teacher<T>(int id);
     }

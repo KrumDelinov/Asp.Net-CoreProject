@@ -35,7 +35,7 @@
                 return this.View(input);
             }
 
-            var classroomId = await this.classroomsServices.CreateAsync(input.NumberDescription, input.TeacherId);
+            var classroomId = await this.classroomsServices.CreateAsync(input.Number, input.Description, input.TeacherId);
 
             await this.teacherServises.SetClassroomToTeacher(input.TeacherId);
 
@@ -53,20 +53,20 @@
             return this.View(viewModel);
         }
 
-        [Authorize]
-        public IActionResult Edit(int id)
-        {
+        //[Authorize]
+        //public IActionResult Edit(int id)
+        //{
 
-            var classroom = this.classroomsServices.GetClassroom(id);
+        //    var classroom = this.classroomsServices.GetClassroom(id);
 
-            var techers = this.teacherServises.GetAll<TeacherDropDownViewModel>();
-            var viewModel = new ClassroomEditViewModel
-            {
-                Id = id,
-                NumberDescription = classroom.NumberDescription,
-                Teachers = techers,
-            };
-            return this.View(viewModel);
-        }
+        //    var techers = this.teacherServises.GetAll<TeacherDropDownViewModel>();
+        //    var viewModel = new ClassroomEditViewModel
+        //    {
+        //        Id = id,
+        //        NumberDescription = classroom.NumberDescription,
+        //        Teachers = techers,
+        //    };
+        //    return this.View(viewModel);
+        //}
     }
 }

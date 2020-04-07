@@ -17,11 +17,12 @@
             this.classroomsRepository = classroomsRepository;
         }
 
-        public async Task<int> CreateAsync(string number, int techerId)
+        public async Task<int> CreateAsync(int number, string description, int techerId)
         {
             var classroom = new Classroom
             {
-                NumberDescription = number,
+                Number = number,
+                Description = description,
                 TeacherId = techerId,
 
             };

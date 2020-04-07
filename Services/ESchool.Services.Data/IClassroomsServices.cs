@@ -7,7 +7,7 @@
 
     public interface IClassroomsServices
     {
-        Task<int> CreateAsync(string number, int techerId);
+        Task<int> CreateAsync(int number, string description, int techerId);
 
         IEnumerable<T> GetAll<T>();
 
