@@ -8,7 +8,6 @@
     using ESchool.Data.Common.Repositories;
     using ESchool.Data.Models;
     using ESchool.Services.Mapping;
-    using ESchool.Web.ViewModels.Teachers;
 
     public class TeacherServises : ITeacherServises
     {
