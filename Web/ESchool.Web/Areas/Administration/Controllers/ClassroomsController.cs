@@ -3,11 +3,12 @@
     using System.Threading.Tasks;
     using ESchool.Data.Models;
     using ESchool.Services.Data;
+    using ESchool.Web.Areas.Administration.Controllers;
     using ESchool.Web.ViewModels.Classrooms;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    public class ClassroomsController : BaseController
+    public class ClassroomsController : AdministrationController
     {
         private readonly IClassroomsServices classroomsServices;
         private readonly ITeacherServises teacherServises;
@@ -53,20 +54,75 @@
             return this.View(viewModel);
         }
 
-        //[Authorize]
-        //public IActionResult Edit(int id)
-        //{
+        public IActionResult Edit(int id)
+        {
+            var classroom = this.classroomsServices.GetClassroom(id);
+            var teachers = this.teacherServises.GetAll<TeacherDropDownViewModel>();
+            var viewModel = new ClassroomEditViewModel
+            {
+               Id = classroom.Id,
+               Number = classroom.Number,
+               Description = classroom.Description,
+               TeacherId = classroom.TeacherId,
+               Teachers = teachers,
+            };
 
-        //    var classroom = this.classroomsServices.GetClassroom(id);
+            return this.View(viewModel);
+        }
 
-        //    var techers = this.teacherServises.GetAll<TeacherDropDownViewModel>();
-        //    var viewModel = new ClassroomEditViewModel
-        //    {
-        //        Id = id,
-        //        NumberDescription = classroom.NumberDescription,
-        //        Teachers = techers,
-        //    };
-        //    return this.View(viewModel);
-        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(ClassroomEditViewModel viewModel)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(viewModel);
+            }
+
+            var classroom = this.classroomsServices.GetClassroom(viewModel.Id);
+
+            await this.teacherServises.RemoveClassroomFromTeacher(classroom.TeacherId);
+
+            classroom.Number = viewModel.Number;
+            classroom.Description = viewModel.Description;
+            classroom.TeacherId = viewModel.TeacherId;
+
+            await this.classroomsServices.UpdateClassroom(classroom);
+            await this.teacherServises.SetClassroomToTeacher(viewModel.TeacherId);
+
+            return this.RedirectToAction("Details", new { id = viewModel.Id });
+        }
+
+        public IActionResult Details(int id)
+        {
+            ClassroomViewModel viewModel = this.classroomsServices.Classroom<ClassroomViewModel>(id);
+
+            return this.View(viewModel);
+        }
+
+        public IActionResult Delete(int id)
+        {
+            ClassroomViewModel viewModel = this.classroomsServices.Classroom<ClassroomViewModel>(id);
+
+            if (!this.ModelState.IsValid)
+            {
+                return this.NotFound();
+            }
+
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var classroom = this.classroomsServices.GetClassroom(id);
+            var teacher = this.teacherServises.GetTeacher(classroom.TeacherId);
+            teacher.HasClassroom = false;
+            await this.teacherServises.UpdateTeacher(teacher);
+            await this.classroomsServices.DeleteClassroom(classroom);
+            return this.RedirectToAction(nameof(this.All));
+        }
     }
 }

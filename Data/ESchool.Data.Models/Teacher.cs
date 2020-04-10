@@ -9,7 +9,6 @@
 
     public class Teacher : BaseDeletableModel<int>
     {
-
         [Required]
         public string FirstName { get; set; }
 
@@ -17,6 +16,8 @@
         public string LastName { get; set; }
 
         public bool HasClassroom { get; set; } = false;
+
+        public bool HasGrade { get; set; } = false;
 
         public string UserId { get; set; }
 

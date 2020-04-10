@@ -8,7 +8,7 @@
 
     public class Grade : BaseDeletableModel<int>
     {
-        public DateTime Issue { get; set; }
+        public int Issue { get; set; }
 
         public string Description { get; set; }
 

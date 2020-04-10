@@ -15,6 +15,12 @@
 
         Task<int> SetClassroomToTeacher(int id);
 
+        Task<int> SetGradeToTeacher(int id);
+
+        Task<int> RemoveClassroomFromTeacher(int id);
+
+        Task<int> RemoveGradeFromTeacher(int id);
+
         Teacher GetTeacher(int id);
 
         Task UpdateTeacher(Teacher teacher);

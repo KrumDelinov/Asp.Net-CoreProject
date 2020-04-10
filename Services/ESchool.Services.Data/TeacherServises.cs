@@ -32,8 +32,6 @@
             return teacher.Id;
         }
 
-    
-
         public IEnumerable<T> GetAll<T>()
         {
             return this.techerRepository.All().To<T>().ToList();
@@ -70,7 +68,6 @@
         {
             this.techerRepository.Update(teacher);
             await this.techerRepository.SaveChangesAsync();
-
         }
 
         public async Task DeleteTeacher(Teacher teacher)
@@ -78,6 +75,30 @@
             this.techerRepository.Delete(teacher);
 
             await this.techerRepository.SaveChangesAsync();
+        }
+
+        public async Task<int> RemoveClassroomFromTeacher(int id)
+        {
+            var teacher = this.techerRepository.All().Where(x => x.Id == id).FirstOrDefault();
+            teacher.HasClassroom = false;
+            await this.techerRepository.SaveChangesAsync();
+            return teacher.Id;
+        }
+
+        public async Task<int> SetGradeToTeacher(int id)
+        {
+            var teacher = this.techerRepository.All().Where(x => x.Id == id).FirstOrDefault();
+            teacher.HasGrade = true;
+            await this.techerRepository.SaveChangesAsync();
+            return teacher.Id;
+        }
+
+        public async Task<int> RemoveGradeFromTeacher(int id)
+        {
+            var teacher = this.techerRepository.All().Where(x => x.Id == id).FirstOrDefault();
+            teacher.HasGrade = false;
+            await this.techerRepository.SaveChangesAsync();
+            return teacher.Id;
         }
     }
 }

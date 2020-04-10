@@ -276,8 +276,8 @@ namespace ESchool.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("Issue")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("Issue")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
@@ -479,6 +479,9 @@ namespace ESchool.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("HasClassroom")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("HasGrade")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")

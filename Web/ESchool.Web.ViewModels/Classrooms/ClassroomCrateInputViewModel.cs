@@ -12,6 +12,7 @@
         [Display(Name ="Room Number")]
         public int Number { get; set; }
 
+        [Required]
         [Display(Name = "Cabinet Description")]
         public string Description { get; set; }
 

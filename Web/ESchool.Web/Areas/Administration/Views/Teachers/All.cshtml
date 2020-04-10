@@ -58,7 +58,7 @@
                                     @item.LastName
                                 </td>
                                 <td>
-                                    @item.SubjectDescription
+                                    @(item.SubjectDescription == null ? "Emty" : item.SubjectDescription)
                                 </td>
 
                                 <td>

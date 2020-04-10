@@ -19,6 +19,8 @@
 
         public bool HasClassroom { get; set; }
 
+        public bool HasGrade { get; set; }
+
         public string FullNameAndSubject { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)

@@ -121,7 +121,7 @@
 
             TeacherViewModel viewModel = this.teacherServises.Teacher<TeacherViewModel>(id);
 
-            if (!this.ModelState.IsValid)
+            if (!this.ModelState.IsValid )
             {
                 return this.NotFound();
             }
@@ -129,7 +129,6 @@
             return this.View(viewModel);
         }
 
-        //POST: Teachers/Delete/5
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -140,7 +139,5 @@
             await this.teacherServises.DeleteTeacher(teacher);
             return this.RedirectToAction(nameof(this.All));
         }
-
-    
     }
 }

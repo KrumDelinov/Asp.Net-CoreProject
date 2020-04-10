@@ -10,7 +10,9 @@ namespace ESchool.Web.ViewModels.Classrooms
     {
         public int Id { get; set; }
 
-        public string NumberDescription { get; set; }
+        public int Number { get; set; }
+
+        public string Description { get; set; }
 
         public string TeacherFirstName { get; set; }
 

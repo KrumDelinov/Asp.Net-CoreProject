@@ -1,7 +1,7 @@
 ﻿@model ESchool.Web.ViewModels.Classrooms.ClassroomEditViewModel
 @{
     ViewData["Title"] = "Edit";
-    var teachers = Model.Teachers.Where(x => x.HasClassroom == false)
+    var teachers = Model.Teachers.Where(x => x.HasClassroom == false )
        .Select(x => new SelectListItem(x.FullNameAndSubject, x.Id.ToString()));
 
 }

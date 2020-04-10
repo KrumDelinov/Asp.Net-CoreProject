@@ -14,5 +14,9 @@
         T Classroom<T>(int id);
 
         Classroom GetClassroom(int id);
+
+        Task UpdateClassroom(Classroom classroom);
+
+        Task DeleteClassroom(Classroom classroom);
     }
 }

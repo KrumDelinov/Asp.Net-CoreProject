@@ -9,6 +9,7 @@
     using ESchool.Data.Repositories;
     using ESchool.Data.Seeding;
     using ESchool.Services.Data;
+    using ESchool.Services.Data.Contracts;
     using ESchool.Services.Mapping;
     using ESchool.Services.Messaging;
     using ESchool.Web.ViewModels;
@@ -66,6 +67,7 @@
             services.AddTransient<IClassroomsServices, ClassroomsServices>();
             services.AddTransient<ITeacherServises, TeacherServises>();
             services.AddTransient<ISubjectsServices, SubjectsServices>();
+            services.AddTransient<IGradesServices, GradesServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

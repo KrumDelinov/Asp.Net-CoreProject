@@ -22,7 +22,7 @@
         }
 
         // GET: Administration/Students
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> All()
         {
             var applicationDbContext = _context.Students.Include(s => s.Grade).Include(s => s.User);
             return View(await applicationDbContext.ToListAsync());

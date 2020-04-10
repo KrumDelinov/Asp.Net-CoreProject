@@ -35,7 +35,7 @@
 
         public IEnumerable<T> GetAll<T>()
         {
-            return this.classroomsRepository.All().To<T>().ToList();
+            return this.classroomsRepository.All().OrderBy(x => x.Number).To<T>().ToList();
         }
 
         public T Classroom<T>(int id)
@@ -50,6 +50,19 @@
             var classroom = this.classroomsRepository.All().Where(x => x.Id == id).FirstOrDefault();
 
             return classroom;
+        }
+
+        public async Task UpdateClassroom(Classroom classroom)
+        {
+            this.classroomsRepository.Update(classroom);
+            await this.classroomsRepository.SaveChangesAsync();
+        }
+
+        public async Task DeleteClassroom(Classroom classroom)
+        {
+            this.classroomsRepository.Delete(classroom);
+
+            await this.classroomsRepository.SaveChangesAsync();
         }
     }
 }
