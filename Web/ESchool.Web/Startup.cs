@@ -68,6 +68,7 @@
             services.AddTransient<ITeacherServises, TeacherServises>();
             services.AddTransient<ISubjectsServices, SubjectsServices>();
             services.AddTransient<IGradesServices, GradesServices>();
+            services.AddTransient<IStudentsServices, StudentsServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

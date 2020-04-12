@@ -7,6 +7,8 @@
 
     using ESchool.Data;
     using ESchool.Data.Models;
+    using ESchool.Services.Data.Contracts;
+    using ESchool.Web.ViewModels.Students;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.EntityFrameworkCore;
@@ -15,13 +17,17 @@
     public class StudentsController : AdministrationController
     {
         private readonly ApplicationDbContext _context;
+        private readonly IGradesServices gradesServices;
+        private readonly IStudentsServices studentsServices;
 
-        public StudentsController(ApplicationDbContext context)
+        public StudentsController(ApplicationDbContext context, IGradesServices gradesServices, IStudentsServices studentsServices)
         {
             _context = context;
+            this.gradesServices = gradesServices;
+            this.studentsServices = studentsServices;
         }
 
-        // GET: Administration/Students
+        // GET: Administration/Students 
         public async Task<IActionResult> All()
         {
             var applicationDbContext = _context.Students.Include(s => s.Grade).Include(s => s.User);
@@ -51,27 +57,24 @@
         // GET: Administration/Students/Create
         public IActionResult Create()
         {
-            ViewData["GradeId"] = new SelectList(_context.Grades, "Id", "Id");
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
-            return View();
+            var grades = this.gradesServices.GetAll<GradeDropDownViewModel>();
+            var viewModel = new StudentsCreateViewModel();
+            viewModel.Grades = grades;
+            return this.View(viewModel);
         }
 
-        // POST: Administration/Students/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FirstName,LastName,UserId,GradeId,IsDeleted,DeletedOn,Id,CreatedOn,ModifiedOn")] Student student)
+        public async Task<IActionResult> Create(StudentsCreateViewModel inputModel)
         {
-            if (ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                _context.Add(student);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return this.View(inputModel);
             }
-            ViewData["GradeId"] = new SelectList(_context.Grades, "Id", "Id", student.GradeId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", student.UserId);
-            return View(student);
+
+            var studentId = await this.studentsServices.CreateAsync(inputModel.FirstName, inputModel.LastName, inputModel.BirthDate, inputModel.GradeId);
+            await this.gradesServices.AddStudetToGrade(inputModel.GradeId, studentId);
+            return this.RedirectToAction("Details", "Grades", new { id = inputModel.GradeId });
         }
 
         // GET: Administration/Students/Edit/5

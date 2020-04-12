@@ -1,14 +1,7 @@
 ﻿@model ESchool.Web.ViewModels.Teachers.AllTeachersViewModel
 @{
     ViewData["Title"] = "All";
-    var userId = string.Empty;
 
-    bool isEmpty = Model.Teachers.Any(x => x.UserUserName == null);
-
-    if (isEmpty)
-    {
-        userId = "Empty";
-    }
 }
 
 
