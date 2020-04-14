@@ -17,20 +17,20 @@
     public class StudentsController : AdministrationController
     {
         private readonly ApplicationDbContext _context;
-        private readonly IGradesServices gradesServices;
+        private readonly ICoursesServices courseServices;
         private readonly IStudentsServices studentsServices;
 
-        public StudentsController(ApplicationDbContext context, IGradesServices gradesServices, IStudentsServices studentsServices)
+        public StudentsController(ApplicationDbContext context, ICoursesServices courseServices, IStudentsServices studentsServices)
         {
             _context = context;
-            this.gradesServices = gradesServices;
+            this.courseServices = courseServices;
             this.studentsServices = studentsServices;
         }
 
         // GET: Administration/Students 
         public async Task<IActionResult> All()
         {
-            var applicationDbContext = _context.Students.Include(s => s.Grade).Include(s => s.User);
+            var applicationDbContext = _context.Students.Include(s => s.Course).Include(s => s.User);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -43,7 +43,7 @@
             }
 
             var student = await _context.Students
-                .Include(s => s.Grade)
+                .Include(s => s.Course)
                 .Include(s => s.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (student == null)
@@ -57,9 +57,9 @@
         // GET: Administration/Students/Create
         public IActionResult Create()
         {
-            var grades = this.gradesServices.GetAll<GradeDropDownViewModel>();
+            var courses = this.courseServices.GetAll<CourseDropDownViewModel>();
             var viewModel = new StudentsCreateViewModel();
-            viewModel.Grades = grades;
+            viewModel.Courses = courses;
             return this.View(viewModel);
         }
 
@@ -72,9 +72,9 @@
                 return this.View(inputModel);
             }
 
-            var studentId = await this.studentsServices.CreateAsync(inputModel.FirstName, inputModel.LastName, inputModel.BirthDate, inputModel.GradeId);
-            await this.gradesServices.AddStudetToGrade(inputModel.GradeId, studentId);
-            return this.RedirectToAction("Details", "Grades", new { id = inputModel.GradeId });
+            var studentId = await this.studentsServices.CreateAsync(inputModel.FirstName, inputModel.LastName, inputModel.BirthDate, inputModel.CourseId);
+            await this.courseServices.AddStudetToCourse(inputModel.CourseId, studentId);
+            return this.RedirectToAction("Details", "Courses", new { id = inputModel.CourseId });
         }
 
         // GET: Administration/Students/Edit/5
@@ -90,7 +90,7 @@
             {
                 return NotFound();
             }
-            ViewData["GradeId"] = new SelectList(_context.Grades, "Id", "Id", student.GradeId);
+            ViewData["GradeId"] = new SelectList(_context.Courses, "Id", "Id", student.CourseId);
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", student.UserId);
             return View(student);
         }
@@ -127,7 +127,7 @@
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GradeId"] = new SelectList(_context.Grades, "Id", "Id", student.GradeId);
+            ViewData["GradeId"] = new SelectList(_context.Courses, "Id", "Id", student.CourseId);
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", student.UserId);
             return View(student);
         }
@@ -141,7 +141,7 @@
             }
 
             var student = await _context.Students
-                .Include(s => s.Grade)
+                .Include(s => s.Course)
                 .Include(s => s.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (student == null)

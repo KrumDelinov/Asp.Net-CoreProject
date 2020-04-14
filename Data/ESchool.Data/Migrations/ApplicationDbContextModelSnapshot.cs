@@ -215,49 +215,7 @@ namespace ESchool.Data.Migrations
                     b.ToTable("Classrooms");
                 });
 
-            modelBuilder.Entity("ESchool.Data.Models.Exam", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<decimal>("Result")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SubjectId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.HasIndex("StudentId");
-
-                    b.HasIndex("SubjectId");
-
-                    b.ToTable("Exams");
-                });
-
-            modelBuilder.Entity("ESchool.Data.Models.Grade", b =>
+            modelBuilder.Entity("ESchool.Data.Models.Course", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -291,7 +249,67 @@ namespace ESchool.Data.Migrations
 
                     b.HasIndex("TeacherId");
 
-                    b.ToTable("Grades");
+                    b.ToTable("Courses");
+                });
+
+            modelBuilder.Entity("ESchool.Data.Models.CoursesTeachers", b =>
+                {
+                    b.Property<int>("TeacherId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsSelected")
+                        .HasColumnType("bit");
+
+                    b.HasKey("TeacherId", "CourseId");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("CoursesTeachers");
+                });
+
+            modelBuilder.Entity("ESchool.Data.Models.Exam", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Result")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("SubjectId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TeacherId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("SubjectId");
+
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("Exams");
                 });
 
             modelBuilder.Entity("ESchool.Data.Models.Parent", b =>
@@ -390,6 +408,9 @@ namespace ESchool.Data.Migrations
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
@@ -399,9 +420,6 @@ namespace ESchool.Data.Migrations
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("GradeId")
-                        .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -418,7 +436,7 @@ namespace ESchool.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GradeId");
+                    b.HasIndex("CourseId");
 
                     b.HasIndex("IsDeleted");
 
@@ -427,12 +445,30 @@ namespace ESchool.Data.Migrations
                     b.ToTable("Students");
                 });
 
+            modelBuilder.Entity("ESchool.Data.Models.StudentsExams", b =>
+                {
+                    b.Property<int>("ExamId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ExamId", "StudentId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("StudentsExams");
+                });
+
             modelBuilder.Entity("ESchool.Data.Models.Subject", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("CourseId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -443,9 +479,6 @@ namespace ESchool.Data.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("GradeId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -454,7 +487,7 @@ namespace ESchool.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GradeId");
+                    b.HasIndex("CourseId");
 
                     b.HasIndex("IsDeleted");
 
@@ -639,23 +672,36 @@ namespace ESchool.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ESchool.Data.Models.Exam", b =>
+            modelBuilder.Entity("ESchool.Data.Models.Course", b =>
                 {
-                    b.HasOne("ESchool.Data.Models.Student", "Student")
-                        .WithMany("Exams")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("ESchool.Data.Models.Subject", "Subject")
-                        .WithMany("Exams")
-                        .HasForeignKey("SubjectId")
+                    b.HasOne("ESchool.Data.Models.Teacher", "Teacher")
+                        .WithMany()
+                        .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ESchool.Data.Models.Grade", b =>
+            modelBuilder.Entity("ESchool.Data.Models.CoursesTeachers", b =>
                 {
+                    b.HasOne("ESchool.Data.Models.Course", "Course")
+                        .WithMany("CourseTeachers")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("ESchool.Data.Models.Teacher", "Teacher")
+                        .WithMany("CoursesTeacher")
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ESchool.Data.Models.Exam", b =>
+                {
+                    b.HasOne("ESchool.Data.Models.Subject", null)
+                        .WithMany("Exams")
+                        .HasForeignKey("SubjectId");
+
                     b.HasOne("ESchool.Data.Models.Teacher", "Teacher")
                         .WithMany()
                         .HasForeignKey("TeacherId")
@@ -687,9 +733,9 @@ namespace ESchool.Data.Migrations
 
             modelBuilder.Entity("ESchool.Data.Models.Student", b =>
                 {
-                    b.HasOne("ESchool.Data.Models.Grade", "Grade")
+                    b.HasOne("ESchool.Data.Models.Course", "Course")
                         .WithMany("Students")
-                        .HasForeignKey("GradeId")
+                        .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -698,11 +744,26 @@ namespace ESchool.Data.Migrations
                         .HasForeignKey("UserId");
                 });
 
+            modelBuilder.Entity("ESchool.Data.Models.StudentsExams", b =>
+                {
+                    b.HasOne("ESchool.Data.Models.Exam", "Exam")
+                        .WithMany("StudentsExam")
+                        .HasForeignKey("ExamId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("ESchool.Data.Models.Student", "Student")
+                        .WithMany("StudentExams")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("ESchool.Data.Models.Subject", b =>
                 {
-                    b.HasOne("ESchool.Data.Models.Grade", null)
+                    b.HasOne("ESchool.Data.Models.Course", null)
                         .WithMany("Subjects")
-                        .HasForeignKey("GradeId");
+                        .HasForeignKey("CourseId");
                 });
 
             modelBuilder.Entity("ESchool.Data.Models.Teacher", b =>

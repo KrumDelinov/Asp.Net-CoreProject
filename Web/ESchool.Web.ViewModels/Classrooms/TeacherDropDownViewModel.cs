@@ -23,6 +23,8 @@
 
         public string FullNameAndSubject { get; set; }
 
+        public bool IsSelected { get; set; }
+
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Teacher, TeacherDropDownViewModel>().ForMember(

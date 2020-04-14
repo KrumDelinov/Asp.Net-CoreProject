@@ -11,9 +11,9 @@
 
     public class TeacherServises : ITeacherServises
     {
-        private readonly IDeletableEntityRepository<Teacher> techerRepository;
+        private readonly EfDeletableEntityRepository<Teacher> techerRepository;
 
-        public TeacherServises(IDeletableEntityRepository<Teacher> techerRepository)
+        public TeacherServises(EfDeletableEntityRepository<Teacher> techerRepository)
         {
             this.techerRepository = techerRepository;
         }

@@ -21,14 +21,14 @@
 
         public virtual ApplicationUser User { get; set; }
 
-        public int GradeId { get; set; }
+        public int CourseId { get; set; }
 
-        public virtual Grade Grade { get; set; }
+        public virtual Course Course { get; set; }
 
         public virtual ICollection<Attendance> Attendances { get; set; } = new HashSet<Attendance>();
 
-        public virtual ICollection<Exam> Exams { get; set; } = new HashSet<Exam>();
+        public virtual ICollection<StudentsExams> StudentExams { get; set; } = new HashSet<StudentsExams>();
 
-        public ICollection<ParentStudent> StudentParents { get; set; } = new HashSet<ParentStudent>();
+        public virtual ICollection<ParentStudent> StudentParents { get; set; } = new HashSet<ParentStudent>();
     }
 }

@@ -9,7 +9,7 @@
 
     using Microsoft.EntityFrameworkCore;
 
-    public class EfDeletableEntityRepository<TEntity> : EfRepository<TEntity>, IDeletableEntityRepository<TEntity>
+    public class EfDeletableEntityRepository<TEntity> : EfRepository<TEntity>, Common.Repositories.EfDeletableEntityRepository<TEntity>
         where TEntity : class, IDeletableEntity
     {
         public EfDeletableEntityRepository(ApplicationDbContext context)

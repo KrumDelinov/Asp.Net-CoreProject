@@ -5,7 +5,7 @@
 
     using ESchool.Data.Common.Models;
 
-    public interface IDeletableEntityRepository<TEntity> : IRepository<TEntity>
+    public interface EfDeletableEntityRepository<TEntity> : IRepository<TEntity>
         where TEntity : class, IDeletableEntity
     {
         IQueryable<TEntity> AllWithDeleted();

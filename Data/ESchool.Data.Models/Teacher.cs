@@ -26,5 +26,7 @@
         public virtual Subject Subject { get; set; }
 
         public virtual ApplicationUser User { get; set; }
+
+        public virtual ICollection<CoursesTeachers> CoursesTeacher { get; set; } = new HashSet<CoursesTeachers>();
     }
 }

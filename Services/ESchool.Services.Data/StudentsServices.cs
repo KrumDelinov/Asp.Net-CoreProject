@@ -12,10 +12,10 @@ namespace ESchool.Services.Data
 {
     public class StudentsServices : IStudentsServices
     {
-        private readonly IDeletableEntityRepository<Student> studentRepository;
-        private readonly IDeletableEntityRepository<Grade> gradeRepository;
+        private readonly EfDeletableEntityRepository<Student> studentRepository;
+        private readonly EfDeletableEntityRepository<Course> gradeRepository;
 
-        public StudentsServices(IDeletableEntityRepository<Student> studentRepository, IDeletableEntityRepository<Grade> gradeRepository)
+        public StudentsServices(EfDeletableEntityRepository<Student> studentRepository, EfDeletableEntityRepository<Course> gradeRepository)
         {
             this.studentRepository = studentRepository;
             this.gradeRepository = gradeRepository;
@@ -28,7 +28,7 @@ namespace ESchool.Services.Data
                 FirstName = firstName,
                 LastName = lastName,
                 BirthDate = birthDate,
-                GradeId = gradeId,
+                CourseId = gradeId,
             };
             
             await this.studentRepository.AddAsync(student);

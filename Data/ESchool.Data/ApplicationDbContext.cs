@@ -40,9 +40,13 @@
 
         public DbSet<Teacher> Teachers { get; set; }
 
-        public DbSet<Grade> Grades { get; set; }
+        public DbSet<Course> Courses { get; set; }
 
         public DbSet<ParentStudent> ParentsStudents { get; set; }
+
+        public DbSet<CoursesTeachers> CoursesTeachers { get; set; }
+
+        public DbSet<StudentsExams> StudentsExams { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 
@@ -69,6 +73,10 @@
             base.OnModelCreating(builder);
 
             builder.Entity<ParentStudent>().HasKey(sc => new { sc.StudentId, sc.ParentId });
+
+            builder.Entity<CoursesTeachers>().HasKey(sc => new { sc.TeacherId, sc.CourseId });
+
+            builder.Entity<StudentsExams>().HasKey(sc => new { sc.ExamId, sc.StudentId });
 
             ConfigureUserIdentityRelations(builder);
 

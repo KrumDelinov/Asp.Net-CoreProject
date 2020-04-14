@@ -16,8 +16,8 @@ namespace ESchool.Web.ViewModels.Students
         public DateTime BirthDate { get; set; }
 
         [Display(Name = "Grades")]
-        public int GradeId { get; set; }
+        public int CourseId { get; set; }
 
-        public IEnumerable<GradeDropDownViewModel> Grades { get; set; }
+        public IEnumerable<CourseDropDownViewModel> Courses { get; set; }
     }
 }
