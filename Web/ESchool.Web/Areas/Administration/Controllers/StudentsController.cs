@@ -35,23 +35,11 @@
         }
 
         // GET: Administration/Students/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int id)
         {
-            if (id == null)
-            {
-                return this.NotFound();
-            }
+            StudentViewModel viewModel = this.studentsServices.Student<StudentViewModel>(id);
 
-            var student = await _context.Students
-                .Include(s => s.Course)
-                .Include(s => s.User)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (student == null)
-            {
-                return NotFound();
-            }
-
-            return this.View(student);
+            return this.View(viewModel);
         }
 
         // GET: Administration/Students/Create

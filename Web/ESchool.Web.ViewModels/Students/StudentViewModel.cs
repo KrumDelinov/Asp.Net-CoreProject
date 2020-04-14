@@ -1,11 +1,10 @@
-﻿using ESchool.Data.Models;
-using ESchool.Services.Mapping;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ESchool.Web.ViewModels.Students
+﻿namespace ESchool.Web.ViewModels.Students
 {
+    using System;
+
+    using ESchool.Data.Models;
+    using ESchool.Services.Mapping;
+
     public class StudentViewModel : IMapFrom<Student>
     {
         public int Id { get; set; }
@@ -16,6 +15,6 @@ namespace ESchool.Web.ViewModels.Students
 
         public DateTime BirthDate { get; set; }
 
-        public string GradeDescription { get; set; }
+        public string CourseDescription { get; set; }
     }
 }

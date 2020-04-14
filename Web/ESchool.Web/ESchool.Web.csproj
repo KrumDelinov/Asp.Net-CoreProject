@@ -54,4 +54,8 @@
     <ProjectReference Include="..\ESchool.Web.Infrastructure\ESchool.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\ESchool.Web.ViewModels\ESchool.Web.ViewModels.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\vendor\" />
+  </ItemGroup>
 </Project>
