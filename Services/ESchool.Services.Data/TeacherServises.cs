@@ -11,9 +11,9 @@
 
     public class TeacherServises : ITeacherServises
     {
-        private readonly EfDeletableEntityRepository<Teacher> techerRepository;
+        private readonly IDeletableEntityRepository<Teacher> techerRepository;
 
-        public TeacherServises(EfDeletableEntityRepository<Teacher> techerRepository)
+        public TeacherServises(IDeletableEntityRepository<Teacher> techerRepository)
         {
             this.techerRepository = techerRepository;
         }
@@ -99,6 +99,13 @@
             teacher.HasGrade = false;
             await this.techerRepository.SaveChangesAsync();
             return teacher.Id;
+        }
+
+        public Teacher GetUserTeacher(string userId)
+        {
+            var techer = this.techerRepository.All().Where(x => x.UserId == userId).FirstOrDefault();
+
+            return techer;
         }
     }
 }

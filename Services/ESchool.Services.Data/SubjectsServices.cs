@@ -9,10 +9,10 @@
 
     public class SubjectsServices : ISubjectsServices
     {
-        private readonly EfDeletableEntityRepository<Subject> subjectRepository;
-        private readonly EfDeletableEntityRepository<Teacher> techerRepository;
+        private readonly IDeletableEntityRepository<Subject> subjectRepository;
+        private readonly IDeletableEntityRepository<Teacher> techerRepository;
 
-        public SubjectsServices(EfDeletableEntityRepository<Subject> subjectRepository, EfDeletableEntityRepository<Teacher> techerRepository)
+        public SubjectsServices(IDeletableEntityRepository<Subject> subjectRepository, IDeletableEntityRepository<Teacher> techerRepository)
         {
             this.subjectRepository = subjectRepository;
             this.techerRepository = techerRepository;

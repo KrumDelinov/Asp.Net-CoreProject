@@ -20,7 +20,7 @@
         [Fact]
         public void GetCountShouldReturnCorrectNumber()
         {
-            var repository = new Mock<ESchool.Data.Common.Repositories.EfDeletableEntityRepository<Setting>>();
+            var repository = new Mock<ESchool.Data.Common.Repositories.IDeletableEntityRepository<Setting>>();
             repository.Setup(r => r.All()).Returns(new List<Setting>
                                                         {
                                                             new Setting(),

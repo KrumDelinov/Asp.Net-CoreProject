@@ -12,13 +12,28 @@ namespace ESchool.Services.Data
 {
     public class StudentsServices : IStudentsServices
     {
-        private readonly EfDeletableEntityRepository<Student> studentRepository;
-        private readonly EfDeletableEntityRepository<Course> gradeRepository;
+        private readonly IDeletableEntityRepository<Student> studentRepository;
+        private readonly IDeletableEntityRepository<Course> gradeRepository;
+        private readonly IAtendacesServices atendacesServices;
 
-        public StudentsServices(EfDeletableEntityRepository<Student> studentRepository, EfDeletableEntityRepository<Course> gradeRepository)
+        public StudentsServices(
+            IDeletableEntityRepository<Student> studentRepository,
+            IDeletableEntityRepository<Course> gradeRepository,
+            IAtendacesServices atendacesServices)
         {
             this.studentRepository = studentRepository;
             this.gradeRepository = gradeRepository;
+            this.atendacesServices = atendacesServices;
+        }
+
+        public async Task AddAttendanceToStudent(int studentId, int attndanceId)
+        {
+            var attendance = this.atendacesServices.Attendances<Attendance>(attndanceId);
+            var student = this.Student<Student>(studentId);
+            student.Attendances.Add(attendance);
+
+            await this.studentRepository.SaveChangesAsync();
+
         }
 
         public async Task<int> CreateAsync(string firstName, string lastName, DateTime birthDate, int gradeId)
@@ -30,7 +45,7 @@ namespace ESchool.Services.Data
                 BirthDate = birthDate,
                 CourseId = gradeId,
             };
-            
+
             await this.studentRepository.AddAsync(student);
             await this.studentRepository.SaveChangesAsync();
 

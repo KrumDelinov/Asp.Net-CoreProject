@@ -21,6 +21,8 @@
 
         Task<int> RemoveGradeFromTeacher(int id);
 
+        Teacher GetUserTeacher(string userId);
+
         Teacher GetTeacher(int id);
 
         Task UpdateTeacher(Teacher teacher);

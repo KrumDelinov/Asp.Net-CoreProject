@@ -2,6 +2,8 @@
 {
     using ESchool.Data.Models;
     using ESchool.Services.Mapping;
+    using ESchool.Web.ViewModels.Grades;
+    using System.Collections.Generic;
 
     public class TeacherViewModel : IMapFrom<Teacher>
     {
@@ -14,5 +16,7 @@
         public string SubjectDescription { get; set; }
 
         public string UserUserName { get; set; }
+
+        public virtual IEnumerable<CourseViewModel> TeacherCourses { get; set; }
     }
 }

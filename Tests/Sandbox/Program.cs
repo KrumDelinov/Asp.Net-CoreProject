@@ -75,7 +75,7 @@
             services.AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)
                 .AddRoles<ApplicationRole>().AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddScoped(typeof(ESchool.Data.Common.Repositories.EfDeletableEntityRepository<>), typeof(ESchool.Data.Repositories.EfDeletableEntityRepository<>));
+            services.AddScoped(typeof(ESchool.Data.Common.Repositories.IDeletableEntityRepository<>), typeof(ESchool.Data.Repositories.EfDeletableEntityRepository<>));
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();
 

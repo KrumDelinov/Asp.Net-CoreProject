@@ -11,6 +11,8 @@ namespace ESchool.Services.Data.Contracts
 
         Task<int> CreateAsync(string firstName, string lastName, DateTime birthDate, int gradeId);
 
+        Task AddAttendanceToStudent(int studentId, int attndanceId);
+
         int GetCount();
 
         IEnumerable<T> GetAll<T>();

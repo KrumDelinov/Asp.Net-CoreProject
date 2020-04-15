@@ -5,10 +5,11 @@
     using System.Text;
 
     using ESchool.Data.Common.Models;
+    using ESchool.Data.Models.Enums;
 
     public class Exam : BaseDeletableModel<int>
     {
-        public string Description { get; set; }
+        public ExamType ExamType { get; set; }
 
         public decimal Result { get; set; }
 

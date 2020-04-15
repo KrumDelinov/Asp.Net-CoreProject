@@ -57,7 +57,7 @@
             services.AddSingleton(this.configuration);
 
             // Data repositories
-            services.AddScoped(typeof(Data.Common.Repositories.EfDeletableEntityRepository<>), typeof(Data.Repositories.EfDeletableEntityRepository<>));
+            services.AddScoped(typeof(Data.Common.Repositories.IDeletableEntityRepository<>), typeof(Data.Repositories.EfDeletableEntityRepository<>));
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();
 
@@ -69,6 +69,8 @@
             services.AddTransient<ISubjectsServices, SubjectsServices>();
             services.AddTransient<ICoursesServices, CoursesServices>();
             services.AddTransient<IStudentsServices, StudentsServices>();
+            services.AddTransient<IExamsServices, ExamsServices>();
+            services.AddTransient<IAtendacesServices, AtendacesServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

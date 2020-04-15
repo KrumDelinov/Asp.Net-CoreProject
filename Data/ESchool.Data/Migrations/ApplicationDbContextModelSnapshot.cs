@@ -260,9 +260,6 @@ namespace ESchool.Data.Migrations
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsSelected")
-                        .HasColumnType("bit");
-
                     b.HasKey("TeacherId", "CourseId");
 
                     b.HasIndex("CourseId");
@@ -283,8 +280,8 @@ namespace ESchool.Data.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ExamType")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");

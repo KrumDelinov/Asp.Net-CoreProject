@@ -1,0 +1,89 @@
+﻿@model ESchool.Web.ViewModels.Grades.CourseTeachersViewModel
+@{
+    ViewData["Title"] = "AddTeachersToCourse";
+    var teachers = Model.Teachers.Select(x => new SelectListItem(x.FullNameAndSubject, x.Id.ToString()));
+
+}
+
+
+    <div>
+        <h4>Course</h4>
+        <dl class="row">
+
+            <dt class="col-sm-2">
+                Паралелка
+            </dt>
+            <dd class="col-sm-10">
+                @Model.Description
+            </dd>
+            <dt class="col-sm-2">
+                Класен Ръководител
+            </dt>
+            <dd class="col-sm-10">
+                @Model.TeacherFirstName
+            </dd>
+        </dl>
+    </div>
+<h1>Add Teachers</h1>
+
+<form asp-action="AddTeachersToCourse" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input hidden asp-for="Id">
+
+    <div class="card">
+        <div class="card-header">
+            <h2> Add Teachers with subject</h2>
+        </div>
+        <div class="form-group">
+            <label asp-for="TeacherId" class="control-label"></label>
+            <select asp-for="TeacherId" class="form-control" asp-items=teachers></select>
+            <span asp-validation-for="TeacherId" class="text-danger"></span>
+        </div>
+
+        @*<div class="card-body">
+            @foreach (var item in Model.Teachers)
+            {
+                <div class="form-check m-1">
+                <input asp-for="@item.IsSelected" class="form-check-input" />
+                <label asp-for="@item.IsSelected" class="form-check-label">@item.FullNameAndSubject</label>
+
+            </div>
+                <div class="form-check">
+                <input asp-for="@item.IsSelected" type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">@item.FullNameAndSubject</label>
+            </div>
+
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        @item.FullNameAndSubject
+                    <input class="form-check-input" asp-for="@item.IsSelected" /> @Html.DisplayNameFor(model => model.IsSelected)
+                </label>
+            </div>
+
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label asp-for="@item.IsSelected">
+                            <input asp-for="@item.IsSelected" />
+                            @item.FullNameAndSubject
+                        </label>
+                    </div>
+                </div>
+            }
+        </div>*@
+        <div class="card-footer">
+            <input type="submit" value="Update" class="btn btn-primary" />
+            <a asp-controller="Courses" asp-action="AddTeachersToCourse" class="btn btn-primary">Cancel</a>
+        </div>
+    </div>
+
+    @*<div class="form-group">
+        <label asp-for="TeacherId" class="control-label"></label>
+        <select asp-for="TeacherId" class="form-control" asp-items=teachers></select>
+        <span asp-validation-for="TeacherId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Edit" class="btn btn-primary" />
+        <a asp-controller="Courses" asp-action="All" class="btn btn-primary">Cancel</a>
+    </div>*@
+</form>
+

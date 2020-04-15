@@ -1,0 +1,58 @@
+﻿@model ESchool.Web.ViewModels.Grades.AllCoursesViewModel
+
+@{
+    ViewData["Title"] = "All";
+}
+
+<h1>All</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Випуск
+            </th>
+            <th>
+                Кабинет
+            </th>
+            <th>
+                Класен Ръководител
+            </th>
+
+            <th>
+                Предмет
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Courses)
+        {
+            <tr>
+                <td>
+                    @item.Issue
+                </td>
+                <td>
+                    @item.Description
+                </td>
+                <td>
+                    @item.TeacherFirstName
+                </td>
+
+                <td>
+                    @item.TeacherSubjectDescription
+                </td>
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

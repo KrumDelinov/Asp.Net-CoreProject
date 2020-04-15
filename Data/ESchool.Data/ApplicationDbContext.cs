@@ -8,7 +8,7 @@
 
     using ESchool.Data.Common.Models;
     using ESchool.Data.Models;
-
+    using ESchool.Data.Models.Enums;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
 
