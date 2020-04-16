@@ -16,6 +16,10 @@
         [Required]
         public string LastName { get; set; }
 
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+
         [Range(1, int.MaxValue)]
         [Display(Name ="Subject")]
         public int SubjectId { get; set; }

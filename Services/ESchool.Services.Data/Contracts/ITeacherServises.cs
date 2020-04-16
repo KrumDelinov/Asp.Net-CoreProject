@@ -7,7 +7,7 @@
 
     public interface ITeacherServises
     {
-        Task<int> CreateAsync(string firstName, string lastName, int subjectId);
+        Task<int> CreateAsync(string firstName, string lastName, int subjectId, string email = null);
 
         int GetCount();
 

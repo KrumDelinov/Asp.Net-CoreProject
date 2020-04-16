@@ -1,17 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ESchool.Data.Models;
-using ESchool.Services.Data;
-using ESchool.Services.Data.Contracts;
-using ESchool.Web.ViewModels.Grades;
-using ESchool.Web.ViewModels.Teachers;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-
-namespace ESchool.Web.Areas.Teacher
+﻿namespace ESchool.Web.Areas.Teacher
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using ESchool.Data.Models;
+    using ESchool.Services.Data;
+    using ESchool.Services.Data.Contracts;
+    using ESchool.Web.ViewModels.Grades;
+    using ESchool.Web.ViewModels.Teachers;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+
     public class DashboardController : TeachersController
     {
         private readonly ICoursesServices coursesServices;
@@ -36,11 +37,9 @@ namespace ESchool.Web.Areas.Teacher
             return this.View();
         }
 
-        public async Task <IActionResult> All()
+        public async Task<IActionResult> All()
         {
-            var user = await this.userManager.GetUserAsync(this.User);
-
-            var userId = await this.userManager.GetUserIdAsync(user);
+            string userId = await this.GetUserId();
 
             var techer = this.teacherServises.GetUserTeacher(userId);
 
@@ -54,11 +53,32 @@ namespace ESchool.Web.Areas.Teacher
             return this.View(viewModel);
         }
 
+        public async Task<IActionResult> MyCourse()
+        {
+            string userId = await this.GetUserId();
+
+            var techer = this.teacherServises.GetUserTeacher(userId);
+
+            var courseId = this.coursesServices.GetTeacherCourseId(techer.Id);
+
+            CourseViewModel viewModel = this.coursesServices.Course<CourseViewModel>(courseId);
+
+            return this.View(viewModel);
+        }
+
         public IActionResult Details(int id)
         {
             CourseViewModel viewModel = this.coursesServices.Course<CourseViewModel>(id);
 
             return this.View(viewModel);
+        }
+
+        private async Task<string> GetUserId()
+        {
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            var userId = await this.userManager.GetUserIdAsync(user);
+            return userId;
         }
     }
 }

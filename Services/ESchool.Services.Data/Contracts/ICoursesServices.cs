@@ -17,6 +17,8 @@ namespace ESchool.Services.Data.Contracts
 
         T Course<T>(int id);
 
+        int GetTeacherCourseId(int teacherId);
+
         Course GetCourse(int id);
 
         Task UpdateCourse(Course course);

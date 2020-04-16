@@ -1,7 +1,7 @@
 ﻿@model ESchool.Web.ViewModels.Teachers.TeacherCreateInputModel
 @{
     ViewData["Title"] = "Create";
-    var subjects = Model.Subjects.Select(x => new SelectListItem(x.Description, x.Id.ToString()));
+    var subjects = Model.Subjects.Select(x => new SelectListItem(x.Description, x.Id.ToString())).ToList();
 }
 
 <h1>Create</h1>
@@ -19,6 +19,12 @@
         <input asp-for="LastName" class="form-control" />
         <span asp-validation-for="LastName" class="text-danger"></span>
     </div>
+    <div class="form-group">
+        <label asp-for="Email" class="control-label"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+  
     <div class="form-group">
         <label asp-for="SubjectId" class="control-label"></label>
         <select asp-for="SubjectId" class="form-control" asp-items=subjects></select>

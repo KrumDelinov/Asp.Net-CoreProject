@@ -1,15 +1,16 @@
-﻿using ESchool.Data.Common.Repositories;
-using ESchool.Data.Models;
-using ESchool.Services.Data.Contracts;
-using ESchool.Services.Mapping;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ESchool.Services.Data
+﻿namespace ESchool.Services.Data
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    using ESchool.Data.Common.Repositories;
+    using ESchool.Data.Models;
+    using ESchool.Services.Data.Contracts;
+    using ESchool.Services.Mapping;
+
     public class StudentsServices : IStudentsServices
     {
         private readonly IDeletableEntityRepository<Student> studentRepository;
@@ -28,8 +29,8 @@ namespace ESchool.Services.Data
 
         public async Task AddAttendanceToStudent(int studentId, int attndanceId)
         {
-            var attendance = this.atendacesServices.Attendances<Attendance>(attndanceId);
-            var student = this.Student<Student>(studentId);
+            var attendance = this.atendacesServices.GetAttendance(attndanceId);
+            var student = this.GetStudent(studentId);
             student.Attendances.Add(attendance);
 
             await this.studentRepository.SaveChangesAsync();
@@ -54,7 +55,7 @@ namespace ESchool.Services.Data
 
         public IEnumerable<T> GetAll<T>()
         {
-            throw new NotImplementedException();
+            return this.studentRepository.All().To<T>().ToList();
         }
 
         public int GetCount()

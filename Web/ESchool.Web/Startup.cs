@@ -71,6 +71,7 @@
             services.AddTransient<IStudentsServices, StudentsServices>();
             services.AddTransient<IExamsServices, ExamsServices>();
             services.AddTransient<IAtendacesServices, AtendacesServices>();
+            services.AddTransient<IParentServices, ParentServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

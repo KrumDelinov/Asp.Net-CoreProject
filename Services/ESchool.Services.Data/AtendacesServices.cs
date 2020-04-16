@@ -19,6 +19,7 @@ namespace ESchool.Services.Data
             this.attendaceRepository = attendaceRepository;
         }
 
+
         public T Attendances<T>(int id)
         {
             var attendance = this.attendaceRepository.All().Where(x => x.Id == id).To<T>().FirstOrDefault();
@@ -41,5 +42,11 @@ namespace ESchool.Services.Data
             return attendace.Id;
         }
 
+        public Attendance GetAttendance(int id)
+        {
+           var attendance = this.attendaceRepository.All().Where(x => x.Id == id).FirstOrDefault();
+
+           return attendance;
+        }
     }
 }

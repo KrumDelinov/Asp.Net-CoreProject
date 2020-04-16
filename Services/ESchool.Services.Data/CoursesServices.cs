@@ -111,5 +111,14 @@
                 .To<T>()
                 .ToList();
         }
+
+        public int GetTeacherCourseId(int teacherId)
+        {
+            var course = this.courseRepository.All()
+                .Where(x => x.TeacherId == teacherId)
+                .Select(x => x.Id)
+                .FirstOrDefault();
+            return course;
+        }
     }
 }

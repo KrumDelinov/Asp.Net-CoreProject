@@ -55,7 +55,7 @@
             //var user = await this.userManager.GetUserAsync(this.User);
 
             //var role = roleManager.GetRoleNameAsync();
-            var teacherId = await this.teacherServises.CreateAsync(inputModel.FirstName, inputModel.LastName, inputModel.SubjectId);
+            var teacherId = await this.teacherServises.CreateAsync(inputModel.FirstName, inputModel.LastName, inputModel.SubjectId, inputModel.Email);
 
             return this.RedirectToAction("Details", new { id = teacherId });
         }
@@ -82,13 +82,24 @@
         // GET: Administration/Students/Edit/5
         public IActionResult Edit(int id)
         {
+
             var teacher = this.teacherServises.GetTeacher(id);
             var subjects = this.subjectsServices.GetAll<SubjectsDropDownViewModel>();
+            //var teacherEmail = teacher.Email == null ? empty : teacher.Email;
+
+            string empty = "No Email";
+            if (teacher.Email == null)
+            {
+                teacher.Email = empty;
+            }
+
+
             var viewModel = new TeacherEditViewModel
             {
                 Id = teacher.Id,
                 FirstName = teacher.FirstName,
                 LastName = teacher.LastName,
+                Email = teacher.Email,
                 SubjectId = teacher.SubjectId,
                 Subjects = subjects,
             };
@@ -106,9 +117,15 @@
             }
 
             var teacher = this.teacherServises.GetTeacher(viewModel.Id);
+            string empty = "No Email";
+            if (viewModel.Email == null)
+            {
+                viewModel.Email = empty;
+            }
 
             teacher.FirstName = viewModel.FirstName;
             teacher.LastName = viewModel.LastName;
+            teacher.Email = viewModel.Email.ToUpper();
             teacher.SubjectId = viewModel.SubjectId;
 
             await this.teacherServises.UpdateTeacher(teacher);

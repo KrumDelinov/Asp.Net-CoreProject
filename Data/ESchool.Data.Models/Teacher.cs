@@ -15,6 +15,8 @@
         [Required]
         public string LastName { get; set; }
 
+        public string Email { get; set; }
+
         public bool HasClassroom { get; set; } = false;
 
         public bool HasGrade { get; set; } = false;
