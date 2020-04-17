@@ -1,15 +1,13 @@
-﻿using ESchool.Data.Common.Repositories;
-using ESchool.Data.Models;
-using ESchool.Services.Data.Contracts;
-using ESchool.Services.Mapping;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ESchool.Services.Data
+﻿namespace ESchool.Services.Data
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using ESchool.Data.Common.Repositories;
+    using ESchool.Data.Models;
+    using ESchool.Services.Data.Contracts;
+    using ESchool.Services.Mapping;
+
     public class AtendacesServices : IAtendacesServices
     {
         private readonly IDeletableEntityRepository<Attendance> attendaceRepository;
@@ -18,7 +16,6 @@ namespace ESchool.Services.Data
         {
             this.attendaceRepository = attendaceRepository;
         }
-
 
         public T Attendances<T>(int id)
         {

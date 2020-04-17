@@ -1,21 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using ESchool.Data;
-using ESchool.Data.Models;
-using ESchool.Web.ViewModels.Attendances;
-using ESchool.Services.Data;
-using ESchool.Services.Data.Contracts;
-using Microsoft.AspNetCore.Identity;
-using ESchool.Web.Areas.Teacher;
-
-namespace ESchool.Web.Areas.Teachers.Controllers
+﻿namespace ESchool.Web.Areas.Teachers.Controllers
 {
-   
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using ESchool.Data;
+    using ESchool.Data.Models;
+    using ESchool.Services.Data;
+    using ESchool.Services.Data.Contracts;
+    using ESchool.Web.Areas.Teacher;
+    using ESchool.Web.ViewModels.Attendances;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Rendering;
+    using Microsoft.EntityFrameworkCore;
+
     public class AttendancesController : TeachersController
     {
         private readonly ApplicationDbContext _context;

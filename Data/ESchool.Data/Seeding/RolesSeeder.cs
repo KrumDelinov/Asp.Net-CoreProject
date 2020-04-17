@@ -62,41 +62,6 @@
                 {
                     await userManager.AddToRoleAsync(user, GlobalConstants.AdministratorRoleName);
                 }
-
-                //for (int i = 1; i <= 15; i++)
-                //{
-                //    if (i <= 5)
-                //    {
-                //        var tempUser = new ApplicationUser
-                //        {
-                //            UserName = $"{Teacher}{i}@gmail.com",
-                //            Email = $"{Teacher}{i}@gmail.com",
-                //            EmailConfirmed = true,
-                //        };
-                //        var tempResult = await userManager.CreateAsync(user, password);
-                //    }
-                //    else if (i > 5 && i <= 10)
-                //    {
-                //        var tempUser = new ApplicationUser
-                //        {
-                //            UserName = $"{Student}{i}@gmail.com",
-                //            Email = $"{Student}{i}@gmail.com",
-                //            EmailConfirmed = true,
-                //        };
-                //        var tempResult = await userManager.CreateAsync(user, password);
-                //    }
-                //    else
-                //    {
-                //        var tempUser = new ApplicationUser
-                //        {
-                //            UserName = $"{Parent}{i}@gmail.com",
-                //            Email = $"{Parent}{i}@gmail.com",
-                //            EmailConfirmed = true,
-                //        };
-                //        var tempResult = await userManager.CreateAsync(user, password);
-                //    }
-
-                //}
             }
         }
 

@@ -58,6 +58,11 @@
             return this.studentRepository.All().To<T>().ToList();
         }
 
+        public IEnumerable<T> GetAllCourseStudents<T>(int courseId)
+        {
+            return this.studentRepository.All().Where(x => x.CourseId == courseId).To<T>().ToList();
+        }
+
         public int GetCount()
         {
             throw new NotImplementedException();
