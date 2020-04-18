@@ -15,15 +15,18 @@
     {
         private readonly IDeletableEntityRepository<Student> studentRepository;
         private readonly IDeletableEntityRepository<Course> gradeRepository;
+        private readonly IDeletableEntityRepository<Attendance> attendanceRepository;
         private readonly IAtendacesServices atendacesServices;
 
         public StudentsServices(
             IDeletableEntityRepository<Student> studentRepository,
             IDeletableEntityRepository<Course> gradeRepository,
+            IDeletableEntityRepository<Attendance> attendanceRepository,
             IAtendacesServices atendacesServices)
         {
             this.studentRepository = studentRepository;
             this.gradeRepository = gradeRepository;
+            this.attendanceRepository = attendanceRepository;
             this.atendacesServices = atendacesServices;
         }
 
@@ -80,6 +83,22 @@
             var student = this.studentRepository.All().Where(x => x.Id == id).To<T>().FirstOrDefault();
 
             return student;
+        }
+
+
+        public IEnumerable<T> GetAllParentStudents<T>(int id)
+        {
+            return this.studentRepository.All()
+              .Where(x => x.StudentParents.Any(i => i.ParentId == id))
+              .To<T>()
+              .ToList();
+        }
+
+        public IEnumerable<T> GetAllStudentAttendaces<T>(int studentId)
+        {
+            var attendaces = this.attendanceRepository.All().Where(x => x.StudentId == studentId).To<T>().ToList();
+
+            return attendaces;
         }
     }
 }

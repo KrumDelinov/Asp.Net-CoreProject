@@ -17,7 +17,11 @@
 
         IEnumerable<T> GetAll<T>();
 
+        IEnumerable<T> GetAllStudentAttendaces<T>(int studentId);
+
         IEnumerable<T> GetAllCourseStudents<T>(int courseId);
+
+        IEnumerable<T> GetAllParentStudents<T>(int id);
 
         T Student<T>(int id);
 

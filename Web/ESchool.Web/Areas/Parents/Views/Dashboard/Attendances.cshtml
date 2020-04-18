@@ -1,0 +1,68 @@
+﻿@model ESchool.Web.ViewModels.Students.StudentForParentViewModel
+
+
+@{
+    ViewData["Title"] = "MyStudent";
+
+    string modelName = Model.FullName;
+
+}
+
+
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+
+    <div class="alert-heading">
+
+        <h1 class="h3 mb-2 text-gray-800">@modelName</h1>
+    </div>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Teacher</th>
+                            <th>Remark</th>
+                            <th>Data</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Teacher</th>
+                            <th>Remark</th>
+                            <th>Data</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var item in Model.Attendances)
+                        {
+                            <tr>
+                                <td>
+                                    @item.TeacherFullName
+                                </td>
+                                <td>
+                                    @item.Remark
+                                </td>
+                    
+                                <td>
+                                    @item.CreatedOn.Substring(0, 16)
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div>
+    <a asp-controller="Dashboard" asp-action="Index">Back to Dashboard</a>
+</div>
+

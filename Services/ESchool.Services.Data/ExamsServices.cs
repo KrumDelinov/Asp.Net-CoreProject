@@ -2,8 +2,10 @@
 using ESchool.Data.Models;
 using ESchool.Data.Models.Enums;
 using ESchool.Services.Data.Contracts;
+using ESchool.Services.Mapping;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -46,6 +48,14 @@ namespace ESchool.Services.Data
             await this.examRepository.SaveChangesAsync();
 
             return exam.Id;
+        }
+
+        public IEnumerable<T> GetAllStuentExans<T>(int studentId)
+        {
+            return this.examRepository.All()
+                .Where(x => x.StudentsExam.All(i => i.StudentId == studentId))
+                .To<T>()
+                .ToList();
         }
     }
 }

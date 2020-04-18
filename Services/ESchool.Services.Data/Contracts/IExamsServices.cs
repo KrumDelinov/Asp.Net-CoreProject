@@ -10,5 +10,7 @@ namespace ESchool.Services.Data.Contracts
         Task<int> CreateAsync(string axamType, decimal result, int teacherId);
 
         Task AddExamToStudent(int studentId, int examId);
+
+        IEnumerable<T> GetAllStuentExans<T>(int studentId);
     }
 }
