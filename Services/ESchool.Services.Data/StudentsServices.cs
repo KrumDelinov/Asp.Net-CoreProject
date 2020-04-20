@@ -100,5 +100,11 @@
 
             return attendaces;
         }
+
+        public Student GetUserStudent(string userId)
+        {
+            var student = this.studentRepository.All().FirstOrDefault(x => x.UserId == userId);
+            return student;
+        }
     }
 }

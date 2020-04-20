@@ -20,6 +20,5 @@
 
         Parent GetUserParent(string userId);
 
-        
     }
 }

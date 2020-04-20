@@ -120,5 +120,13 @@
                 .FirstOrDefault();
             return course;
         }
+
+        public IEnumerable<T> GetCourseAllTeachers<T>(int id)
+        {
+            return this.teacherRepository.All()
+               .Where(x => x.CoursesTeacher.Any(i => i.CourseId == id))
+               .To<T>()
+               .ToList();
+        }
     }
 }

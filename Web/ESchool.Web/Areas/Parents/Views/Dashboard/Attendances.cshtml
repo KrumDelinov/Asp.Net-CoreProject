@@ -8,17 +8,34 @@
 
 }
 
-
+@*@foreach (var item in Model.Attendances)
+    {
+        <div class="media-body">
+            <h4 class="media-heading"><a asp-controller="Posts" asp-action="ById" asp-route-id="@post.Id">@post.Title</a></h4>
+            <p>@item.Remark</p>
+            <ul class="list-inline list-unstyled text-right">
+                <li class="list-inline-item">
+                    <i class="fas fa-user-edit"></i> @item.TeacherFullName
+                </li>
+                <li class="list-inline-item">
+                    <i class="fas fa-calendar-alt"></i> @item.CreatedOn
+                </li>
+                <li class="list-inline-item">
+                    <i class="fas fa-comment-dots"></i> @post.CommentsCount comments
+                </li>
+            </ul>
+        </div>
+    }*@
 
 <div class="container-fluid">
 
-    <!-- Page Heading -->
+
 
     <div class="alert-heading">
 
         <h1 class="h3 mb-2 text-gray-800">@modelName</h1>
     </div>
-    <!-- DataTales Example -->
+
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="table-responsive">
@@ -38,22 +55,23 @@
                         </tr>
                     </tfoot>
                     <tbody>
+              
                         @foreach (var item in Model.Attendances)
-                        {
-                            <tr>
-                                <td>
-                                    @item.TeacherFullName
-                                </td>
-                                <td>
-                                    @item.Remark
-                                </td>
-                    
-                                <td>
-                                    @item.CreatedOn.Substring(0, 16)
-                                </td>
+                            {
+                                <tr>
+                                    <td>
+                                        <i class="fas fa-user-edit"></i> @item.TeacherFullName
+                                    </td>
+                                    <td>
+                                        @item.Remark
+                                    </td>
 
-                            </tr>
-                        }
+                                    <td>
+                                        <i class="fas fa-calendar-alt"></i>  @item.CreatedOn.Substring(0, 16)
+                                    </td>
+
+                                </tr>
+                            }
                     </tbody>
                 </table>
             </div>

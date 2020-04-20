@@ -1,0 +1,104 @@
+﻿@model ESchool.Web.ViewModels.Students.IndexStudentViewModel
+
+@{
+    ViewData["Title"] = "Attendances";
+
+    //string modelName = Model.FullName;
+
+    int maxExams = 0;
+
+    foreach (var exams in Model.AllExams)
+    {
+        if (exams.StudentExamsCount > maxExams)
+        {
+            maxExams = exams.StudentExamsCount;
+        }
+    }
+
+
+}
+
+
+    <div class="container-fluid">
+
+        <div>
+            <h4>Course</h4>
+            <dl class="row">
+
+                <dt class="col-sm-2">
+                    Паралелка
+                </dt>
+                <dd class="col-sm-10">
+                    @Model.CourseDescription
+                </dd>
+                <dt class="col-sm-2">
+                    Име
+                </dt>
+                <dd class="col-sm-10">
+                    @Model.FullNameAndBirthDate
+                </dd>
+            </dl>
+        </div>
+        @*<h6> <a asp-action="AddTeachersToCourse" asp-route-id="@Model.Id">AddNewSubjects</a> </h6>*@
+
+
+
+        <div class="row">
+
+            <div class="col-lg-12">
+                <!-- Page Heading -->
+                <h1 class="h3 mb-2 text-gray-800">Students</h1>
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    @*<div class="card-header py-3">
+                        <a asp-controller="Students" asp-action="Create" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i>Add New Student</a>
+                        <h6> <a asp-controller="Students" asp-action="Create">Create New Student</a> </h6>
+                    </div>*@
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Teacher</th>
+                                        @for (int i = 1; i <= maxExams; i++)
+                                        {
+                                            <th>oc</th>
+                                        }
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>Teacher</th>
+                                        @for (int i = 1; i <= maxExams; i++)
+                                        {
+                                            <th>oc</th>
+                                        }
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    @foreach (var item in Model.StudentTeachers)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @item.SubjectDescription
+                                            </td>
+
+                                            @foreach (var exam in Model.AllExams.Where(x => x.TeacherId == item.Id))
+                                            {
+                                                <td>
+                                                    @(exam.Result.ToString() == null ? "_" : exam.Result.ToString())
+                                                </td>
+                                            }
+
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>

@@ -26,5 +26,7 @@
         T Student<T>(int id);
 
         Student GetStudent(int id);
+
+        Student GetUserStudent(string userId);
     }
 }
