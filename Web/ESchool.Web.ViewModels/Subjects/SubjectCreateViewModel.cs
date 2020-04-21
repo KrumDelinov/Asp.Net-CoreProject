@@ -10,7 +10,7 @@ namespace ESchool.Web.ViewModels.Subjects
     public class SubjectCreateViewModel : IMapFrom<Subject>
     {
         [Required]
-        [Display(Name = "Subject")]
+        [Display(Name = "Предмет")]
         public string Description { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Text;
 
     using ESchool.Data.Models;
@@ -9,6 +10,8 @@
 
     public class AttendancesCreateViewModel : IMapFrom<Attendance>
     {
+        [Required]
+        [StringLength(300)]
         public string Remark { get; set; }
 
         public int StudentId { get; set; }

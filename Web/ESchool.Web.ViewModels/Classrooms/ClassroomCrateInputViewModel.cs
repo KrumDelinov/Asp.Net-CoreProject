@@ -9,15 +9,14 @@
     public class ClassroomCrateInputViewModel : IMapFrom<Classroom>
     {
         [Required]
-        [Display(Name ="Room Number")]
+        [Display(Name ="Номер стая")]
         public int Number { get; set; }
 
         [Required]
-        [Display(Name = "Cabinet Description")]
+        [Display(Name = "Описание кабинет")]
         public string Description { get; set; }
 
-        //[Required]
-        [Display(Name = "Teachers")]
+        [Display(Name = "Учител")]
         public int TeacherId { get; set; }
 
         public IEnumerable<TeacherDropDownViewModel> Teachers { get; set; }

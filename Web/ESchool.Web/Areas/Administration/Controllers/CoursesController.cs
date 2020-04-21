@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
     using System.Threading.Tasks;
     using ESchool.Data.Models;
     using ESchool.Services.Data;
@@ -25,8 +26,14 @@
 
         public IActionResult Create()
         {
+
             var techers = this.teacherServises.GetAll<TeacherDropDownViewModel>();
             var viewModel = new CourseCreateInputViewModel();
+            viewModel.Issue = 2000;
+            //Type type = typeof(CourseCreateInputViewModel);
+            ////var property = type.GetProperty("Issue");
+            //int value = (int)type.GetProperty("Issue").GetValue(viewModel, null);
+            //viewModel.Description = (2020 - value).ToString();
             viewModel.Teachers = techers;
             return this.View(viewModel);
         }
@@ -37,6 +44,7 @@
         {
             if (!this.ModelState.IsValid)
             {
+                input.Teachers = this.teacherServises.GetAll<TeacherDropDownViewModel>();
                 return this.View(input);
             }
 
@@ -117,6 +125,7 @@
         {
             if (!this.ModelState.IsValid)
             {
+                viewModel.Teachers = this.teacherServises.GetAll<TeacherDropDownViewModel>();
                 return this.View(viewModel);
             }
 
@@ -158,5 +167,7 @@
             await this.coursesServices.DeleteCourse(grade);
             return this.RedirectToAction(nameof(this.All));
         }
+
+     
     }
 }

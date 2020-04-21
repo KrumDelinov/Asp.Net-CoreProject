@@ -13,10 +13,14 @@
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Името е задължително")]
+        [Display(Name = "Име")]
+        [StringLength(10, ErrorMessage = "{0} имети трябва да е между {2} и {1}.", MinimumLength = 3)]
         public string FirstName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Името е задължително")]
+        [Display(Name = "Име")]
+        [StringLength(10, ErrorMessage = "{0} имети трябва да е между {2} и {1}.", MinimumLength = 3)]
         public string LastName { get; set; }
 
         [Required]

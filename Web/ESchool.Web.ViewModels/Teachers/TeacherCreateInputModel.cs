@@ -10,18 +10,22 @@
 
     public class TeacherCreateInputModel : IMapFrom<Teacher>
     {
-        [Required]
+        [Required(ErrorMessage = "Името е задължително")]
+        [Display(Name = "Име")]
+        [StringLength(10, ErrorMessage = "{0} имети трябва да е между {2} и {1}.", MinimumLength = 3)]
         public string FirstName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Името е задължително")]
+        [StringLength(10, ErrorMessage = "{0} имети трябва да е между {2} и {1}.", MinimumLength = 3)]
+        [Display(Name = "Фамилия")]
         public string LastName { get; set; }
 
-        [Required]
         [EmailAddress]
         public string Email { get; set; }
 
+        [Required]
         [Range(1, int.MaxValue)]
-        [Display(Name ="Subject")]
+        [Display(Name ="Предмет")]
         public int SubjectId { get; set; }
 
         public IEnumerable<SubjectsDropDownViewModel> Subjects { get; set; }

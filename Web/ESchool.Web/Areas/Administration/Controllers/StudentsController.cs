@@ -57,6 +57,7 @@
         {
             if (!this.ModelState.IsValid)
             {
+                inputModel.Courses = this.courseServices.GetAll<CourseDropDownViewModel>();
                 return this.View(inputModel);
             }
 

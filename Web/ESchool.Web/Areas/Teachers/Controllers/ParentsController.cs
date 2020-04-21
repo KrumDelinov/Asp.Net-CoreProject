@@ -104,7 +104,6 @@
                 await this.parentServices.SetStudentToParent(parentId, input.StudentId);
                 return this.RedirectToAction("Details", new { id = parentId });
             }
-     
 
             return this.RedirectToAction("Details", new { id = input.Id });
         }

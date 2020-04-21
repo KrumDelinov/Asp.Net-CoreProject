@@ -49,12 +49,10 @@
         {
             if (!this.ModelState.IsValid)
             {
+                inputModel.Subjects = this.subjectsServices.GetAll<SubjectsDropDownViewModel>();
                 return this.View(inputModel);
             }
 
-            //var user = await this.userManager.GetUserAsync(this.User);
-
-            //var role = roleManager.GetRoleNameAsync();
             var teacherId = await this.teacherServises.CreateAsync(inputModel.FirstName, inputModel.LastName, inputModel.SubjectId, inputModel.Email);
 
             return this.RedirectToAction("Details", new { id = teacherId });
@@ -85,14 +83,12 @@
 
             var teacher = this.teacherServises.GetTeacher(id);
             var subjects = this.subjectsServices.GetAll<SubjectsDropDownViewModel>();
-            //var teacherEmail = teacher.Email == null ? empty : teacher.Email;
 
             string empty = "No Email";
             if (teacher.Email == null)
             {
                 teacher.Email = empty;
             }
-
 
             var viewModel = new TeacherEditViewModel
             {

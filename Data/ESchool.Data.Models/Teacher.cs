@@ -10,11 +10,16 @@
     public class Teacher : BaseDeletableModel<int>
     {
         [Required]
+        [MinLength(3)]
+        [MaxLength(10)]
         public string FirstName { get; set; }
 
         [Required]
+        [MinLength(3)]
+        [MaxLength(10)]
         public string LastName { get; set; }
 
+        [EmailAddress]
         public string Email { get; set; }
 
         public bool HasClassroom { get; set; } = false;
@@ -23,6 +28,7 @@
 
         public string UserId { get; set; }
 
+        [Required]
         public int SubjectId { get; set; }
 
         public virtual Subject Subject { get; set; }

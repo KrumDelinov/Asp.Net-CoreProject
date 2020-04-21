@@ -10,19 +10,26 @@
     public class Student : BaseDeletableModel<int>
     {
         [Required]
+        [MinLength(3)]
+        [MaxLength(10)]
         public string FirstName { get; set; }
 
         [Required]
+        [MinLength(3)]
+        [MaxLength(10)]
         public string LastName { get; set; }
 
+        [EmailAddress]
         public string Email { get; set; }
 
+        [Required]
         public DateTime BirthDate { get; set; }
 
         public string UserId { get; set; }
 
         public virtual ApplicationUser User { get; set; }
 
+        [Required]
         public int CourseId { get; set; }
 
         public virtual Course Course { get; set; }
