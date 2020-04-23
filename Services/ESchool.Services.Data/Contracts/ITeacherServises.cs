@@ -25,6 +25,8 @@
 
         Teacher GetTeacher(int id);
 
+        Task AddUserToTeacher(int techerId, string userId);
+
         Task UpdateTeacher(Teacher teacher);
 
         Task DeleteTeacher(Teacher teacher);

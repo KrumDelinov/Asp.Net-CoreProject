@@ -30,16 +30,11 @@
             var techers = this.teacherServises.GetAll<TeacherDropDownViewModel>();
             var viewModel = new CourseCreateInputViewModel();
             viewModel.Issue = 2000;
-            //Type type = typeof(CourseCreateInputViewModel);
-            ////var property = type.GetProperty("Issue");
-            //int value = (int)type.GetProperty("Issue").GetValue(viewModel, null);
-            //viewModel.Description = (2020 - value).ToString();
             viewModel.Teachers = techers;
             return this.View(viewModel);
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateAsync(CourseCreateInputViewModel input)
         {
             if (!this.ModelState.IsValid)
@@ -120,7 +115,6 @@
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(CourseEditViewModel viewModel)
         {
             if (!this.ModelState.IsValid)

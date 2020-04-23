@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using ESchool.Common;
     using ESchool.Data.Models;
     using ESchool.Services.Data;
     using ESchool.Web.ViewModels.Teachers;
@@ -13,6 +13,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
 
+    [Authorize]
     public class TeachersController : AdministrationController
     {
 
@@ -33,7 +34,6 @@
             this.roleManager = roleManager;
         }
 
-        [Authorize]
         public IActionResult Create()
         {
             var subjects = this.subjectsServices.GetAll<SubjectsDropDownViewModel>();
@@ -44,7 +44,6 @@
 
         // POST: Taechers/Create
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> CreateAsync(TeacherCreateInputModel inputModel)
         {
             if (!this.ModelState.IsValid)
@@ -54,6 +53,39 @@
             }
 
             var teacherId = await this.teacherServises.CreateAsync(inputModel.FirstName, inputModel.LastName, inputModel.SubjectId, inputModel.Email);
+
+            var findUser = await this.userManager.FindByEmailAsync(inputModel.Email);
+
+            if (findUser == null)
+            {
+                var user = new ApplicationUser
+                {
+                    UserName = inputModel.Email,
+                    Email = inputModel.Email,
+                    EmailConfirmed = true,
+                };
+
+                var password = "123456";
+
+                var result = await this.userManager.CreateAsync(user, password);
+
+                if (result.Succeeded)
+                {
+                    await this.teacherServises.AddUserToTeacher(teacherId, user.Id);
+                    await this.userManager.AddToRoleAsync(user, GlobalConstants.TeacherRoleName);
+                    return this.RedirectToAction("Details", new { id = teacherId });
+                }
+            }
+            else
+            {
+                var result = await this.userManager.AddToRoleAsync(findUser, GlobalConstants.TeacherRoleName);
+                await this.teacherServises.AddUserToTeacher(teacherId, findUser.Id);
+                if (result.Succeeded)
+                {
+                    return this.RedirectToAction("Details", new { id = teacherId });
+                }
+
+            }
 
             return this.RedirectToAction("Details", new { id = teacherId });
         }

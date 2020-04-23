@@ -108,5 +108,12 @@
 
             return techer;
         }
+
+        public async Task AddUserToTeacher(int techerId, string userId)
+        {
+            var techer = this.techerRepository.All().Where(x => x.Id == techerId).FirstOrDefault();
+            techer.UserId = userId;
+            await this.techerRepository.SaveChangesAsync();
+        }
     }
 }
