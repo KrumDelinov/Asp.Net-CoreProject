@@ -1,3 +1,21 @@
-﻿@{
+﻿@using ESchool.Common
+@using ESchool.Data.Models
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+
+
+    @if (this.User.IsInRole(GlobalConstants.ParentRoleName))
+    {
+        this.Layout = "_ParentLayout";
+    }
+    else
+    {
+        this.Layout = "_Layout";
+    }
+
+
+@*@{
     this.Layout = "_Layout";
-}
+}*@

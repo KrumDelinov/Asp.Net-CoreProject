@@ -12,5 +12,7 @@ namespace ESchool.Web.ViewModels.Administration.Users
 
         public string Name { get; set; }
 
+        public bool IsSelected { get; set; }
+
     }
 }

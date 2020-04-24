@@ -3,6 +3,7 @@
     ViewData["Title"] = "AllUsers";
 
     var roles = string.Empty;
+    var userId = string.Empty;
 }
 
 <h1>AllUsers</h1>
@@ -42,6 +43,7 @@
                         <tbody>
                             @foreach (var item in Model.AllUsers)
                             {
+                               
                             <tr>
                                 <td>
                                     @item.UserName
@@ -54,8 +56,8 @@
                                 </td>
                                 <td>
                                     
-                                    <form asp-action="EditUserRoles" method="post">
-                                        <input hidden="@item.UserId" />
+                                    @*<form asp-action="EditUserRoles" method="post">
+                                        <input type="hidden" asp-for="@item.UserId" />
                                         <div class="dropdown mb-4">
                                             <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 Add To Role
@@ -63,19 +65,20 @@
                                             <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
                                                 @foreach (var role in Model.Roles.Where(x => item.Roles.Any(n => n.Name != x.Name)))
                                                 {
-                                                    @*@role.Name
-                                                    <input asp-for="@role.Name" class="dropdown-item" />*@
+                                                 
                                                     <a class="dropdown-item" asp-controller="Users" asp-action="EditUserRoles" asp-route-id="roleId">@role.Name</a>
                                                 }
                                             </div>
                                         </div>
 
-                                    </form>
+                                    </form>*@
 
 
                                 </td>
                                 <td>
-                                    <a asp-action="UserDetails" asp-route-id="UserId">Edit</a>
+                                   
+                                    <a asp-controller="Users" asp-action="EditUserRoles"  asp-route-id="@item.UserId">Edit</a>
+                                  
                                 </td>
                             </tr>
                             }

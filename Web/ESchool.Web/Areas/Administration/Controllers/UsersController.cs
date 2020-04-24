@@ -8,6 +8,7 @@
     using ESchool.Data.Common.Models;
     using ESchool.Data.Common.Repositories;
     using ESchool.Data.Models;
+    using ESchool.Data.Repositories;
     using ESchool.Web.ViewModels.Administration.Users;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -30,23 +31,35 @@
             return this.View(roles);
         }
 
-        public async Task<IActionResult> UserDetails(string userId)
+        [HttpGet]
+        public async Task<IActionResult> EditUserRoles(string id)
         {
-            //userId = "276fa1ca-c1d8-4b68-a506-b462758b56ba";
-            var user = await this.userManager.FindByIdAsync(userId);
+      
+            var user = await this.userManager.FindByIdAsync(id);
 
             var roles = await this.userManager.GetRolesAsync(user);
 
-            //var roles = this.userManager.Users.Where(x => x.Id == userId).Select(x => x.Roles).ToList();
+            var allRoles = this.roleManager.Roles;
 
             var userRoles = new List<RoleViewModel>();
 
-            foreach (var name in roles)
+            foreach (var role in allRoles)
             {
+
                 var roleModel = new RoleViewModel
                 {
-                    Name = name,
+                    Id = role.Id,
+                    Name = role.Name,
                 };
+
+                if (await this.userManager.IsInRoleAsync(user, role.Name))
+                {
+                    roleModel.IsSelected = true;
+                }
+                else
+                {
+                    roleModel.IsSelected = false;
+                }
 
                 userRoles.Add(roleModel);
             }
@@ -55,10 +68,20 @@
             {
                 UserId = user.Id,
                 UserName = user.UserName,
+                CreatedOn = user.CreatedOn,
                 Roles = userRoles,
             };
 
             return this.View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult EditUserRoles(UserViewModel model, string id)
+        {
+            ;
+
+            return this.View();
+
         }
 
         public async Task<IActionResult> AllUsersAsync()
@@ -81,7 +104,6 @@
             }
 
             var users = new List<UserViewModel>();
-
 
             foreach (var item in this.userManager.Users)
             {
@@ -116,12 +138,7 @@
             return this.View(viewModel);
         }
 
-        
-        public async Task<IActionResult> EditUserRoles(string userId, string roleId)
-        {
-
-            return null;
-        }
+    
 
         public async Task<IActionResult> EditRole(string id)
         {
