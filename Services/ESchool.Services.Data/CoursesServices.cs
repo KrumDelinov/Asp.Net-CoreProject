@@ -128,5 +128,10 @@
                .To<T>()
                .ToList();
         }
+
+        public int GetCount()
+        {
+            return this.courseRepository.All().Count();
+        }
     }
 }

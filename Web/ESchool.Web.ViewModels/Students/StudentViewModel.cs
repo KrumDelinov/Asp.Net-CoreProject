@@ -1,7 +1,8 @@
 ﻿namespace ESchool.Web.ViewModels.Students
 {
     using System;
-
+    using System.Collections.Generic;
+    using System.Linq;
     using AutoMapper;
     using ESchool.Data.Models;
     using ESchool.Services.Mapping;
@@ -23,5 +24,7 @@
         public string CourseDescription { get; set; }
 
         public string FullNameAndBirthDate => $"{this.FirstName} {this.LastName} {this.BirthDate:dd/mm/yyyy/}";
+
+
     }
 }

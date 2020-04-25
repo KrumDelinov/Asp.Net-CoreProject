@@ -28,10 +28,16 @@
         }
 
         // GET: Administration/Students 
-        public async Task<IActionResult> All()
+        public IActionResult All()
         {
-            var applicationDbContext = _context.Students.Include(s => s.Course).Include(s => s.User);
-            return View(await applicationDbContext.ToListAsync());
+            var students = this.studentsServices.GetAll<StudentViewModel>();
+
+            var viewModel = new AllStudentsViewModel
+            {
+                Students = students,
+            };
+
+            return this.View(viewModel);
         }
 
         // GET: Administration/Students/Details/5

@@ -68,7 +68,7 @@
 
         public int GetCount()
         {
-            throw new NotImplementedException();
+            return this.studentRepository.All().Count();
         }
 
         public Student GetStudent(int id)

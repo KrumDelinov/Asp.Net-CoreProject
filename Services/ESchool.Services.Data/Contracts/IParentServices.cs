@@ -10,6 +10,8 @@
     {
         Task<int> CreateAsync(string firstName, string lastName, string email, string userId);
 
+        int GetCount();
+
         int GetParentId(string email);
 
         bool HasParent(string email);

@@ -1,7 +1,8 @@
 ﻿namespace ESchool.Web.ViewModels.Grades
 {
     using System.Collections.Generic;
-
+    using System.Linq;
+    using System.Security.Principal;
     using ESchool.Data.Models;
     using ESchool.Services.Mapping;
     using ESchool.Web.ViewModels.Students;
@@ -25,5 +26,6 @@
         public virtual IEnumerable<StudentViewModel> Students { get; set; }
 
         public virtual ICollection<TeachersSubject> CourseTeachers { get; set; }
+
     }
 }

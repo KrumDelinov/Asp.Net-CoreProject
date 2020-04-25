@@ -38,6 +38,10 @@
             return parent.Id;
         }
 
+        public int GetCount()
+        {
+            return this.parentRepository.All().Count();
+        }
 
         public int GetParentId(string email)
         {

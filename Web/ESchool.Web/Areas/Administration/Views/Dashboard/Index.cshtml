@@ -1,4 +1,4 @@
-﻿@*@model ESchool.Web.ViewModels.Teachers.AllTeachersViewModel*@
+﻿@model ESchool.Web.ViewModels.Administration.Dashboard.IndexViewModel
 @{
     this.ViewData["Title"] = "Admin dashboard";
 }
@@ -6,164 +6,238 @@
 
 
 <!-- Begin Page Content -->
-<div class="container-fluid">
+    <div class="container-fluid">
+        <div class="row">
 
-    <!-- Page Heading -->
-    <h1 class="h3 mb-1 text-gray-800">Animation Utilities</h1>
-    <p class="mb-4">Bootstrap's default utility classes can be found on the official <a href="https://getbootstrap.com/docs">Bootstrap Documentation</a> page. The custom utilities below were created to extend this theme past the default utility classes built into Bootstrap's framework.</p>
-
-    <!-- Content Row -->
-    <div class="row">
-
-        <!-- Grow In Utility -->
-        <div class="col-lg-6">
-
-            <div class="card position-relative">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Teachers managment</h6>
-                </div>
-                <div class="card-body">
-                    @*<div class="mb-3">
-                        <code>.animated--fade-in</code>
-                    </div>*@
-
-                    <div class="small mb-1">Dropdown Button Example:</div>
-                    <div class="dropdown mb-4">
-                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Teachers
-                        </button>
-                        <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" asp-controller="Teachers" asp-action="All">All Teachers</a>
-                            <a class="dropdown-item" asp-controller="Teachers" asp-action="Create">Create</a>
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Teachers</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.TeacherCount</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                            </div>
                         </div>
                     </div>
-                    <p class="mb-0 small">Note: This utility animates the CSS opacity property, meaning it will override any existing opacity on an element being animated!</p>
                 </div>
             </div>
 
-        </div>
-        <div class="col-lg-6">
-
-            <div class="card position-relative">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Classroom managment</h6>
-                </div>
-                <div class="card-body">
-
-                    <div class="small mb-1">Dropdown Button Example:</div>
-                    <div class="dropdown mb-4">
-                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Classrooms
-                        </button>
-                        <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" asp-controller="Classrooms" asp-action="All">All Classrooms</a>
-                            <a class="dropdown-item" asp-controller="Classrooms" asp-action="Create">Create</a>
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-success shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Students</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.StudentCount</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                            </div>
                         </div>
                     </div>
-                    <p class="mb-0 small">Note: This utility animates the CSS opacity property, meaning it will override any existing opacity on an element being animated!</p>
                 </div>
             </div>
 
-        </div>
-
-        <div class="col-lg-6">
-
-            <div class="card position-relative">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Subject managment</h6>
-                </div>
-                <div class="card-body">
-
-                    <div class="small mb-1">Dropdown Button Example:</div>
-                    <div class="dropdown mb-4">
-                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Subjects
-                        </button>
-                        <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" asp-controller="Subjects" asp-action="All">All Subjects</a>
-                            <a class="dropdown-item" asp-controller="Subjects" asp-action="Create">Create</a>
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-info shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Parents</div>
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col-auto">
+                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">@Model.ParentCount</div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="progress progress-sm mr-2">
+                                            <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                            </div>
                         </div>
                     </div>
-                    <p class="mb-0 small">Note: This utility animates the CSS opacity property, meaning it will override any existing opacity on an element being animated!</p>
                 </div>
             </div>
 
-        </div>
-        <div class="col-lg-6">
-
-            <div class="card position-relative">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Courses managment</h6>
-                </div>
-                <div class="card-body">
-
-                    <div class="small mb-1">Dropdown Button Example:</div>
-                    <div class="dropdown mb-4">
-                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Course
-                        </button>
-                        <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" asp-controller="Courses" asp-action="All">All Courses</a>
-                            <a class="dropdown-item" asp-controller="Courses" asp-action="Create">Create</a>
+            <!-- Pending Requests Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-warning shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Courses</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.CourseCount</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                            </div>
                         </div>
                     </div>
-                    <p class="mb-0 small">Note: This utility animates the CSS opacity property, meaning it will override any existing opacity on an element being animated!</p>
                 </div>
             </div>
-
         </div>
-        <!-- Fade In Utility -->
-        <div class="col-lg-6">
+        <!-- Content Row -->
+        <div class="row">
 
-            <div class="card position-relative">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Student managment</h6>
-                </div>
-                <div class="card-body">
+            <!-- Grow In Utility -->
+            <div class="col-lg-6">
 
-                    <div class="small mb-1">Dropdown Button Example:</div>
-                    <div class="dropdown mb-4">
-                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Student
-                        </button>
-                        <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" asp-controller="Students" asp-action="All">All Subjects</a>
-                            <a class="dropdown-item" asp-controller="Students" asp-action="Create">Create</a>
-                        </div>
+                <div class="card position-relative">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Teachers managment</h6>
                     </div>
-                    <p class="mb-0 small">Note: This utility animates the CSS opacity property, meaning it will override any existing opacity on an element being animated!</p>
-                </div>
-            </div>
+                    <div class="card-body">
+                        @*<div class="mb-3">
+                            <code>.animated--fade-in</code>
+                        </div>*@
 
-        </div>
-
-        <div class="col-lg-6">
-
-            <div class="card position-relative">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Roles managment</h6>
-                </div>
-                <div class="card-body">
-
-                    <div class="small mb-1">Dropdown Button Example:</div>
-                    <div class="dropdown mb-4">
-                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Roles
-                        </button>
-                        <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" asp-controller="Users" asp-action="AllRoles">AllRoles</a>
-                            <a class="dropdown-item" asp-controller="Users" asp-action="AllUsers">AllUsers</a>
+                        <div class="small mb-1">Dropdown Button Example:</div>
+                        <div class="dropdown mb-4">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Teachers
+                            </button>
+                            <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" asp-controller="Teachers" asp-action="All">All Teachers</a>
+                                <a class="dropdown-item" asp-controller="Teachers" asp-action="Create">Create</a>
+                            </div>
                         </div>
+                        <p class="mb-0 small">Note: This utility animates the CSS opacity property, meaning it will override any existing opacity on an element being animated!</p>
                     </div>
-                    <p class="mb-0 small">Note: This utility animates the CSS opacity property, meaning it will override any existing opacity on an element being animated!</p>
                 </div>
+
+            </div>
+            <div class="col-lg-6">
+
+                <div class="card position-relative">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Classroom managment</h6>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="small mb-1">Dropdown Button Example:</div>
+                        <div class="dropdown mb-4">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Classrooms
+                            </button>
+                            <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" asp-controller="Classrooms" asp-action="All">All Classrooms</a>
+                                <a class="dropdown-item" asp-controller="Classrooms" asp-action="Create">Create</a>
+                            </div>
+                        </div>
+                        <p class="mb-0 small">Note: This utility animates the CSS opacity property, meaning it will override any existing opacity on an element being animated!</p>
+                    </div>
+                </div>
+
             </div>
 
-        </div>
+            <div class="col-lg-6">
 
+                <div class="card position-relative">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Subject managment</h6>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="small mb-1">Dropdown Button Example:</div>
+                        <div class="dropdown mb-4">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Subjects
+                            </button>
+                            <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" asp-controller="Subjects" asp-action="All">All Subjects</a>
+                                <a class="dropdown-item" asp-controller="Subjects" asp-action="Create">Create</a>
+                            </div>
+                        </div>
+                        <p class="mb-0 small">Note: This utility animates the CSS opacity property, meaning it will override any existing opacity on an element being animated!</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-6">
+
+                <div class="card position-relative">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Courses managment</h6>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="small mb-1">Dropdown Button Example:</div>
+                        <div class="dropdown mb-4">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Course
+                            </button>
+                            <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" asp-controller="Courses" asp-action="All">All Courses</a>
+                                <a class="dropdown-item" asp-controller="Courses" asp-action="Create">Create</a>
+                            </div>
+                        </div>
+                        <p class="mb-0 small">Note: This utility animates the CSS opacity property, meaning it will override any existing opacity on an element being animated!</p>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Fade In Utility -->
+            <div class="col-lg-6">
+
+                <div class="card position-relative">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Student managment</h6>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="small mb-1">Dropdown Button Example:</div>
+                        <div class="dropdown mb-4">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Student
+                            </button>
+                            <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" asp-controller="Students" asp-action="All">All Subjects</a>
+                                <a class="dropdown-item" asp-controller="Students" asp-action="Create">Create</a>
+                            </div>
+                        </div>
+                        <p class="mb-0 small">Note: This utility animates the CSS opacity property, meaning it will override any existing opacity on an element being animated!</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-6">
+
+                <div class="card position-relative">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Roles managment</h6>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="small mb-1">Dropdown Button Example:</div>
+                        <div class="dropdown mb-4">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Roles
+                            </button>
+                            <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" asp-controller="Users" asp-action="AllRoles">AllRoles</a>
+                                <a class="dropdown-item" asp-controller="Users" asp-action="AllUsers">AllUsers</a>
+                            </div>
+                        </div>
+                        <p class="mb-0 small">Note: This utility animates the CSS opacity property, meaning it will override any existing opacity on an element being animated!</p>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
 
     </div>
-
-</div>
 <!-- /.container-fluid -->
       

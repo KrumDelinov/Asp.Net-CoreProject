@@ -3,6 +3,7 @@
     using ESchool.Common;
     using ESchool.Data.Models;
     using ESchool.Services.Data;
+    using ESchool.Services.Data.Contracts;
     using ESchool.Web.ViewModels.Administration.Dashboard;
     using ESchool.Web.ViewModels.Teachers;
     using Microsoft.AspNetCore.Identity;
@@ -12,30 +13,38 @@
     {
         private readonly ISettingsService settingsService;
         private readonly ITeacherServises teacherServises;
+        private readonly ICoursesServices coursesServices;
+        private readonly IParentServices parentServices;
+        private readonly IStudentsServices studentsServices;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly RoleManager<ApplicationRole> roleManager;
 
-        public DashboardController(ISettingsService settingsService,
+        public DashboardController(
             ITeacherServises teacherServises,
+            ICoursesServices coursesServices,
+            IParentServices parentServices,
+            IStudentsServices studentsServices,
             UserManager<ApplicationUser> userManager,
             RoleManager<ApplicationRole> roleManager)
         {
-            this.settingsService = settingsService;
             this.teacherServises = teacherServises;
+            this.coursesServices = coursesServices;
+            this.parentServices = parentServices;
+            this.studentsServices = studentsServices;
             this.userManager = userManager;
             this.roleManager = roleManager;
         }
 
         public IActionResult Index()
         {
-            //var teachers = this.teacherServises.GetAll<TeacherViewModel>();
-            //var viewModel = new AllTeachersViewModel
-            //{
-            //    Teachers = teachers,
-            //};
 
-            //return this.View(viewModel);
-            var viewModel = new IndexViewModel { SettingsCount = this.settingsService.GetCount(), };
+            var viewModel = new IndexViewModel
+            {
+                TeacherCount = this.teacherServises.GetCount(),
+                CourseCount = this.coursesServices.GetCount(),
+                StudentCount = this.studentsServices.GetCount(),
+                ParentCount = this.parentServices.GetCount(),
+            };
             return this.View(viewModel);
         }
     }

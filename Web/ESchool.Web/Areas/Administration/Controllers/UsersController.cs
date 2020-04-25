@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using ESchool.Data;
     using ESchool.Data.Common.Models;
     using ESchool.Data.Common.Repositories;
     using ESchool.Data.Models;
@@ -17,11 +17,17 @@
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly RoleManager<ApplicationRole> roleManager;
+        private readonly ApplicationDbContext context;
 
-        public UsersController(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
+        public UsersController
+            (
+                UserManager<ApplicationUser> userManager,
+                RoleManager<ApplicationRole> roleManager,
+                ApplicationDbContext context)
         {
             this.userManager = userManager;
             this.roleManager = roleManager;
+            this.context = context;
         }
 
         public IActionResult AllRoles()
@@ -34,7 +40,9 @@
         [HttpGet]
         public async Task<IActionResult> EditUserRoles(string id)
         {
-      
+            var user1 = this.context.Users.FindAsync(id);
+            var rolles = this.context.Roles.ToList();
+
             var user = await this.userManager.FindByIdAsync(id);
 
             var roles = await this.userManager.GetRolesAsync(user);
@@ -43,16 +51,16 @@
 
             var userRoles = new List<RoleViewModel>();
 
-            foreach (var role in allRoles)
+            foreach (var role in rolles)
             {
-
+                bool isInRole = this.context.UserRoles.Any(x => x.RoleId == role.Id);
                 var roleModel = new RoleViewModel
                 {
                     Id = role.Id,
                     Name = role.Name,
                 };
 
-                if (await this.userManager.IsInRoleAsync(user, role.Name))
+                if (isInRole)
                 {
                     roleModel.IsSelected = true;
                 }
@@ -78,9 +86,12 @@
         [HttpPost]
         public IActionResult EditUserRoles(UserViewModel model, string id)
         {
-            ;
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
 
-            return this.View();
+            return this.View(NotFound());
 
         }
 

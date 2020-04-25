@@ -6,16 +6,28 @@
 
 
 
-    @if (this.User.IsInRole(GlobalConstants.ParentRoleName))
+@if (this.SignInManager.IsSignedIn(this.User))
+{
+    @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+    {
+        this.Layout = "_AdminLayout";
+    }
+
+    else if (this.User.IsInRole(GlobalConstants.ParentRoleName))
     {
         this.Layout = "_ParentLayout";
     }
-    else
+
+    else if (this.User.IsInRole(GlobalConstants.TeacherRoleName))
+    {
+        this.Layout = "_TeacherLayout";
+    }
+}
+else
+{
     {
         this.Layout = "_Layout";
     }
+}
 
 
-@*@{
-    this.Layout = "_Layout";
-}*@

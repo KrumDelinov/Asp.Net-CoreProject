@@ -14,6 +14,8 @@
 
         IEnumerable<T> GetAll<T>();
 
+        int GetCount();
+
         IEnumerable<T> GetAllTeacherCourses<T>(int id);
 
         IEnumerable<T> GetCourseAllTeachers<T>(int id);
