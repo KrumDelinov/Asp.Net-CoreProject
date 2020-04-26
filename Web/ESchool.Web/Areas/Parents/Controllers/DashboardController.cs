@@ -9,9 +9,11 @@
     using ESchool.Services.Data.Contracts;
     using ESchool.Web.ViewModels.Parents;
     using ESchool.Web.ViewModels.Students;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
+    [Authorize]
     public class DashboardController : ParentsController
     {
         private readonly IParentServices parentServices;
@@ -42,6 +44,11 @@
 
             var students = this.studentsServices.GetAllParentStudents<StudentViewModel>(parent.Id);
 
+            if (students == null)
+            {
+                return this.View("NotFound");
+            }
+
             var viewModel = new IndexViewModel
             {
                 ParentStudents = students,
@@ -55,7 +62,7 @@
 
             var exams = this.examsServices.GetAllStuentExans<StudentAllExams>(id);
 
-            var viewModel = new StudentForParentViewModel
+            var viewModel = new StudentAllRolesViewModel
             {
                 StudentExams = exams,
             };
@@ -68,7 +75,7 @@
 
             var attendances = this.studentsServices.GetAllStudentAttendaces<StudentAttendances>(id);
 
-            var viewModel = new StudentForParentViewModel
+            var viewModel = new StudentAllRolesViewModel
             {
                 Attendances = attendances,
             };

@@ -115,5 +115,10 @@
             techer.UserId = userId;
             await this.techerRepository.SaveChangesAsync();
         }
+
+        public T UserTeacher<T>(string userId)
+        {
+            return this.techerRepository.All().Where(x => x.UserId == userId).To<T>().FirstOrDefault();
+        }
     }
 }

@@ -32,9 +32,20 @@
             this.roleManager = roleManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> IndexAsync()
         {
-            return this.View();
+            string userId = await this.GetUserId();
+
+            var teacher = this.teacherServises.GetUserTeacher(userId);
+
+            var viewModel = this.teacherServises.UserTeacher<IndexTeacherViewModel>(userId);
+            //var viewModel = new IndexTeacherViewModel
+            //{
+            //    FirstName = teacher.FirstName,
+            //    LastName = teacher.LastName,
+           
+
+            return this.View(viewModel);
         }
 
         public async Task<IActionResult> All()
@@ -62,6 +73,11 @@
             var courseId = this.coursesServices.GetTeacherCourseId(techer.Id);
 
             CourseViewModel viewModel = this.coursesServices.Course<CourseViewModel>(courseId);
+
+            if (viewModel == null)
+            {
+                return this.View("NotFound");
+            }
 
             return this.View(viewModel);
         }

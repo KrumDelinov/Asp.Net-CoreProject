@@ -106,5 +106,15 @@
             var student = this.studentRepository.All().FirstOrDefault(x => x.UserId == userId);
             return student;
         }
+
+        public int GetStudenCourseId(int studentId)
+        {
+            var courseId = this.studentRepository.All()
+                .Where(x => x.Id == studentId)
+                .Select(c => c.CourseId)
+                .FirstOrDefault();
+
+            return courseId;
+        }
     }
 }

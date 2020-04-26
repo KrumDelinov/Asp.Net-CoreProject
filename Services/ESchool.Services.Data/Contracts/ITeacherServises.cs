@@ -32,5 +32,7 @@
         Task DeleteTeacher(Teacher teacher);
 
         T Teacher<T>(int id);
+
+        T UserTeacher<T>(string userId);
     }
 }

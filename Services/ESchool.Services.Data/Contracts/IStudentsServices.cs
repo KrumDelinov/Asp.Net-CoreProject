@@ -13,6 +13,8 @@
 
         Task AddAttendanceToStudent(int studentId, int attndanceId);
 
+        int GetStudenCourseId(int studentId);
+
         int GetCount();
 
         IEnumerable<T> GetAll<T>();

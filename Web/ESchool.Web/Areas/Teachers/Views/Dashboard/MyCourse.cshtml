@@ -32,131 +32,70 @@
 
 
 
-    <div class="row">
-        <div class="col-lg-12">
-            <!-- Page Heading -->
-            <h1 class="h3 mb-2 text-gray-800">Students</h1>
-            <!-- DataTales Example -->
-            <div class="card shadow mb-4">
-                <div class="card-header py-3">
+<div class="row">
+    <div class="col-lg-12">
+        <!-- Page Heading -->
+        <h1 class="h3 mb-2 text-gray-800">Students</h1>
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
 
 
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>BirthDate</th>
+                                <th>Details</th>
+                                <th>Edit</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>BirthDate</th>
+                                <th>Details</th>
+                                <th>Edit</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            @foreach (var item in Model.Students)
+                            {
                                 <tr>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>BirthDate</th>
-                                    <th>Details</th>
-                                    <th>Edit</th>
-                                </tr>
-                            </thead>
-                            <tfoot>
-                                <tr>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>BirthDate</th>
-                                    <th>Details</th>
-                                    <th>Edit</th>
-                                </tr>
-                            </tfoot>
-                            <tbody>
-                                @foreach (var item in Model.Students)
-                                {
-                                    <tr>
-                                        <td>
-                                            @item.FirstName
-                                        </td>
-                                        <td>
-                                            @item.LastName
-                                        </td>
-                                        <td>
-                                            @item.BirthDate.ToString("yyyy/MM/dd")
-                                        </td>
+                                    <td>
+                                        @item.FirstName
+                                    </td>
+                                    <td>
+                                        @item.LastName
+                                    </td>
+                                    <td>
+                                        @item.BirthDate.ToString("yyyy/MM/dd")
+                                    </td>
 
 
-                                        <td>
-                                            <a asp-action="Details" asp-controller="Students" asp-route-id="@item.Id">Details</a>
-                                        </td>
-                                        <td>
-                                            <a asp-controller="Parents" asp-action="Create" asp-route-id="@item.Id"
-                                               class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                                                <i class="fas fa-download fa-sm text-white-50"></i>Create Parent
-                                            </a>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
+                                    <td>
+                                        <a asp-action="Details" asp-controller="Students" asp-route-id="@item.Id">Details</a>
+                                    </td>
+                                    <td>
+                                        <a asp-controller="Parents" asp-action="Create" asp-route-id="@item.Id"
+                                           class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                            <i class="fas fa-download fa-sm text-white-50"></i>Create Parent
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-
-
-        <div class="col-lg-12">
-            <!-- Page Heading -->
-            <h1 class="h3 mb-2 text-gray-800">Subjects</h1>
-
-
-            <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <div>
-                        <a asp-controller="Courses" asp-action="AddTeachersToCourse" asp-route-id="@Model.Id" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i>Add New Subject</a>
-                    </div>
-
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>Subject</th>
-                                    <th>Teacher First Name</th>
-                                    <th>Teacher Last Name</th>
-                                </tr>
-                            </thead>
-                            <tfoot>
-                                <tr>
-                                    <th>Subject</th>
-                                    <th>Teacher First Name</th>
-                                    <th>Teacher Last Name</th>
-                                </tr>
-                            </tfoot>
-                            <tbody>
-                                @foreach (var item in Model.CourseTeachers)
-                                {
-                                    <tr>
-                                        <td>
-                                            @item.TeacherSubjectDescription
-                                        </td>
-                                        <td>
-                                            @item.TeacherFirstName
-                                        </td>
-                                        <td>
-                                            @item.TeacherLastName
-
-                                        </td>
-                                        @*<td>
-                                                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
-                                            </td>
-                                            <td>
-                                                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                                            </td>*@
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
-
+</div>
 
 </div>
 

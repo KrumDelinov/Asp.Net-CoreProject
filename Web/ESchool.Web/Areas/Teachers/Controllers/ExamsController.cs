@@ -92,6 +92,8 @@
 
             var studentId = inputModel.StudentId;
 
+            var courseId = this.studentsServices.GetStudenCourseId(studentId);
+
             var user = await this.userManager.GetUserAsync(this.User);
 
             var userId = await this.userManager.GetUserIdAsync(user);
@@ -102,7 +104,7 @@
 
             await this.examsServices.AddExamToStudent(studentId, examId);
 
-            return this.RedirectToAction("Details", new { id = examId });
+            return this.RedirectToAction("Details", "Dashboard", new { id = courseId });
         }
 
         // GET: Teachers/Exams/Edit/5

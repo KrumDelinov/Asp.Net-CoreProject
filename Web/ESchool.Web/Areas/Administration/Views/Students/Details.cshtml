@@ -6,36 +6,56 @@
 <div>
     <h4>Student</h4>
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            Име
-        </dt>
-        <dd class="col-sm-10">
-            @Model.FirstName
-        </dd>
-        <dt class="col-sm-2">
-            Фамилия
-        </dt>
-        <dd class="col-sm-10">
-            @Model.LastName
-        </dd>
-        <dt class="col-sm-2">
-            Предмет
-        </dt>
-        <dd class="col-sm-10">
-            @Model.CourseDescription
-        </dd>
-        <dt class="col-sm-2">
-            Дата на раждане
-        </dt>
-        <dd class="col-sm-10">
-            @Model.BirthDate.ToString("yyyy/MM/dd")
-        </dd>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Име
+                </th>
+                <th>
+                    Клас
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Exams
+                </th>
+                <th>
+                    Attendances
+                </th>
 
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="All">Back to List</a>
-</div>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+          
+                <tr>
+                    <td>
+                        @Model.FullNameAndBirthDate
+                    </td>
+                    <td>
+                        @Model.CourseDescription
+                    </td>
+                    <td>
+                        @Model.Email
+                    </td>
+                    <td>
+                        <a asp-controller="Students" asp-action="Exams" asp-route-id="@Model.Id"
+                           class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                            <i class="fas fa-download fa-sm text-white-50"></i>Exams
+                        </a>
+                    </td>
+                    <td>
+                        <a asp-controller="Students" asp-action="Attendances" asp-route-id="@Model.Id"
+                           class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                            <i class="fas fa-download fa-sm text-white-50"></i>Attendaces
+                        </a>
+                    </td>
 
+
+                </tr>
+        </tbody>
+    </table>
+
+</div>
