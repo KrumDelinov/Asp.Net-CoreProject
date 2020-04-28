@@ -1,16 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ESchool.Data.Models;
-using ESchool.Services.Data.Contracts;
-using ESchool.Web.ViewModels.Parents;
-using ESchool.Web.ViewModels.Students;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-
-namespace ESchool.Web.Areas.Parents.Controllers
+﻿namespace ESchool.Web.Areas.Parents.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using ESchool.Data.Models;
+    using ESchool.Services.Data.Contracts;
+    using ESchool.Web.ViewModels.Parents;
+    using ESchool.Web.ViewModels.Students;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+
     public class HomeController : ParentsController
     {
         private readonly UserManager<ApplicationUser> userManager;

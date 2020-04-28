@@ -51,6 +51,8 @@
 
             var viewModel = new IndexViewModel
             {
+                FirstName = $"{parent.FirstName} {parent.LastName}",
+                UserUserName = parent.Email,
                 ParentStudents = students,
             };
 
@@ -59,11 +61,19 @@
 
         public IActionResult Exams(int id)
         {
-
             var exams = this.examsServices.GetAllStuentExans<StudentAllExams>(id);
+            var attendances = this.studentsServices.GetAllStudentAttendaces<StudentAttendances>(id);
+
+            var hasExams = exams.Count();
+            if (hasExams == 0)
+            {
+                return this.View("NotFoundStudent");
+
+            }
 
             var viewModel = new StudentAllRolesViewModel
             {
+                Attendances = attendances,
                 StudentExams = exams,
             };
 
@@ -72,7 +82,6 @@
 
         public IActionResult Attendances(int id)
         {
-
             var attendances = this.studentsServices.GetAllStudentAttendaces<StudentAttendances>(id);
 
             var viewModel = new StudentAllRolesViewModel
@@ -91,5 +100,16 @@
             return userId;
         }
 
+        private StudentAllRolesViewModel StudentViewModel(int id)
+        {
+            var exams = this.examsServices.GetAllStuentExans<StudentAllExams>(id);
+            var attendances = this.studentsServices.GetAllStudentAttendaces<StudentAttendances>(id);
+            var viewModel = new StudentAllRolesViewModel
+            {
+                Attendances = attendances,
+                StudentExams = exams,
+            };
+            return viewModel;
+        }
     }
 }

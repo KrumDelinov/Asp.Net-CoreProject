@@ -8,24 +8,7 @@
 
 }
 
-@*@foreach (var item in Model.Attendances)
-    {
-        <div class="media-body">
-            <h4 class="media-heading"><a asp-controller="Posts" asp-action="ById" asp-route-id="@post.Id">@post.Title</a></h4>
-            <p>@item.Remark</p>
-            <ul class="list-inline list-unstyled text-right">
-                <li class="list-inline-item">
-                    <i class="fas fa-user-edit"></i> @item.TeacherFullName
-                </li>
-                <li class="list-inline-item">
-                    <i class="fas fa-calendar-alt"></i> @item.CreatedOn
-                </li>
-                <li class="list-inline-item">
-                    <i class="fas fa-comment-dots"></i> @post.CommentsCount comments
-                </li>
-            </ul>
-        </div>
-    }*@
+
 
 <div class="container-fluid">
 

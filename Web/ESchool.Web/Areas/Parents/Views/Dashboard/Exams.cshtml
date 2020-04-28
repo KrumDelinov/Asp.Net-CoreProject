@@ -4,24 +4,80 @@
     ViewData["Title"] = "Attendances";
 
     string modelName = Model.FullName;
-    
+    var average = Model.StudentExams.Average(x => x.Result);
+    var attendanses = Model.Attendances.Count();
+    var examCount = Model.StudentExams.Count();
+    var name = Model.FirstName;
+
 }
 
-    <div class="container-fluid">
 
-        <!-- Page Heading -->
+    <h4>Student</h4>
+<hr />
 
+<div class="container-fluid">
+
+    <div class="row">
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-4 col-md-6 mb-3">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Average</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@average</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-4 col-md-6 mb-3">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Attendanses</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@attendanses </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-xl-4 col-md-6 mb-3">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Exams</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@examCount</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
         <div class="alert-heading">
-          
-
             <h1 class="h3 mb-2 text-gray-800">@modelName</h1>
         </div>
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                @*<input hidden asp-for="Id" />*@
-               
-
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -73,11 +129,13 @@
                 </div>
             </div>
         </div>
-
     </div>
 
-    <div>
-        <a asp-controller="Dashboard" asp-action="Index">Back to Dashboard</a>
- 
-    </div>
+</div>
+
+<div>
+    <a asp-controller="Dashboard" asp-action="Index">Back to Dashboard</a>
+
+
+</div>
 

@@ -1,8 +1,8 @@
-﻿using ESchool.Data.Models;
-using ESchool.Services.Mapping;
-
-namespace ESchool.Web.ViewModels.Students
+﻿namespace ESchool.Web.ViewModels.Students
 {
+    using ESchool.Data.Models;
+    using ESchool.Services.Mapping;
+
     public class StudentAllExams : IMapFrom<Exam>
     {
 

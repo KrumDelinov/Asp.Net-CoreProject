@@ -20,7 +20,6 @@
         private readonly ICoursesServices courseServices;
         private readonly IStudentsServices studentsServices;
 
-
         public StudentsController(IExamsServices examsServices, ICoursesServices courseServices, IStudentsServices studentsServices)
         {
             this.examsServices = examsServices;
@@ -42,8 +41,9 @@
 
         public IActionResult Details(int id)
         {
-            StudentViewModel viewModel = this.studentsServices.Student<StudentViewModel>(id);
 
+            var viewModel = this.studentsServices.Student<StudentViewModel>(id);
+ 
             return this.View(viewModel);
         }
 
@@ -72,15 +72,57 @@
 
         public IActionResult Exams(int id)
         {
-
             var exams = this.examsServices.GetAllStuentExans<StudentAllExams>(id);
+            var attendances = this.studentsServices.GetAllStudentAttendaces<StudentAttendances>(id);
+
+            var hasExams = exams.Count();
+            if (hasExams == 0)
+            {
+
+                return this.View("NotFound");
+
+            }
 
             var viewModel = new StudentAllRolesViewModel
             {
+                Attendances = attendances,
                 StudentExams = exams,
+            };
+            return this.View(viewModel);
+
+        }
+
+
+        public IActionResult Attendances(int id)
+        {
+            var attendances = this.studentsServices.GetAllStudentAttendaces<StudentAttendances>(id);
+
+            var viewModel = new StudentAllRolesViewModel
+            {
+                Attendances = attendances,
             };
 
             return this.View(viewModel);
         }
+
+        public IActionResult StudentDetails(int id)
+        {
+            StudentAllRolesViewModel viewModel = this.StudentViewModel(id);
+
+            return this.View(viewModel);
+        }
+
+        private StudentAllRolesViewModel StudentViewModel(int id)
+        {
+            var exams = this.examsServices.GetAllStuentExans<StudentAllExams>(id);
+            var attendances = this.studentsServices.GetAllStudentAttendaces<StudentAttendances>(id);
+            var viewModel = new StudentAllRolesViewModel
+            {
+                Attendances = attendances,
+                StudentExams = exams,
+            };
+            return viewModel;
+        }
+
     }
 }

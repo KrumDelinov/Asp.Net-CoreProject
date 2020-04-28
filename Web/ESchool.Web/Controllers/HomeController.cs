@@ -23,11 +23,6 @@
 
         public IActionResult Index()
         {
-            // var viewModels = new IndexViewModel();
-            // var subjects = this.classroomsServices.GetAll<IndexGradeViewModel>();
-            // viewModels.Classrooms = subjects;
-
-            // return this.View(viewModels);
             return this.View();
         }
 
@@ -38,7 +33,6 @@
 
         public IActionResult HttpError(int errorCode)
         {
-
             return this.View();
         }
 

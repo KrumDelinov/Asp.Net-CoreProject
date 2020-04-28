@@ -39,11 +39,6 @@
             var teacher = this.teacherServises.GetUserTeacher(userId);
 
             var viewModel = this.teacherServises.UserTeacher<IndexTeacherViewModel>(userId);
-            //var viewModel = new IndexTeacherViewModel
-            //{
-            //    FirstName = teacher.FirstName,
-            //    LastName = teacher.LastName,
-           
 
             return this.View(viewModel);
         }

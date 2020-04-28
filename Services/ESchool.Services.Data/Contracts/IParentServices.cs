@@ -22,5 +22,7 @@
 
         Parent GetUserParent(string userId);
 
+        T Parent<T>(int id);
+
     }
 }

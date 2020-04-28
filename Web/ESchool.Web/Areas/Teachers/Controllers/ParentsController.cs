@@ -105,15 +105,12 @@
                 return this.RedirectToAction("Details", new { id = parentId });
             }
 
-            return this.RedirectToAction("Details", new { id = input.Id });
+            return this.View("ParentHasStudent");
         }
 
         public IActionResult Details(int id)
         {
-            var viewModel = new ParentViewModel
-            {
-                Id = id,
-            };
+            var viewModel = this.parentServices.Parent<ParentViewModel>(id);
 
             return this.View(viewModel);
         }

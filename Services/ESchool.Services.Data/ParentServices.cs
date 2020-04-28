@@ -65,6 +65,11 @@
             return result;
         }
 
+        public T Parent<T>(int id)
+        {
+            return this.parentRepository.All().Where(x => x.Id == id).To<T>().FirstOrDefault();
+        }
+
         public bool ParentHasStudent(string email, int studentId)
         {
             var result = this.parentStudentRepository.All()
