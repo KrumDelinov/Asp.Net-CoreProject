@@ -34,6 +34,7 @@
             this.roleManager = roleManager;
         }
 
+
         public IActionResult Create()
         {
             var subjects = this.subjectsServices.GetAll<SubjectsDropDownViewModel>();
@@ -42,7 +43,6 @@
             return this.View(viewModel);
         }
 
-        // POST: Taechers/Create
         [HttpPost]
         public async Task<IActionResult> CreateAsync(TeacherCreateInputModel inputModel)
         {
@@ -84,7 +84,6 @@
                 {
                     return this.RedirectToAction("Details", new { id = teacherId });
                 }
-
             }
 
             return this.RedirectToAction("Details", new { id = teacherId });
@@ -108,11 +107,8 @@
             return this.View(viewModel);
         }
 
-
-        // GET: Administration/Students/Edit/5
         public IActionResult Edit(int id)
         {
-
             var teacher = this.teacherServises.GetTeacher(id);
             var subjects = this.subjectsServices.GetAll<SubjectsDropDownViewModel>();
 
@@ -136,7 +132,6 @@
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(TeacherEditViewModel viewModel)
         {
             if (!this.ModelState.IsValid)
@@ -163,7 +158,6 @@
 
         public IActionResult Delete(int id)
         {
-
             TeacherViewModel viewModel = this.teacherServises.Teacher<TeacherViewModel>(id);
 
             if (!this.ModelState.IsValid )

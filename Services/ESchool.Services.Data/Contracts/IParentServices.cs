@@ -1,10 +1,11 @@
 ﻿namespace ESchool.Services.Data.Contracts
 {
-    using ESchool.Data.Models;
     using System;
     using System.Collections.Generic;
     using System.Text;
     using System.Threading.Tasks;
+
+    using ESchool.Data.Models;
 
     public interface IParentServices
     {

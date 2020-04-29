@@ -13,7 +13,6 @@
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.EntityFrameworkCore;
 
-
     public class StudentsController : AdministrationController
     {
         private readonly IExamsServices examsServices;
@@ -56,7 +55,6 @@
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(StudentsCreateViewModel inputModel)
         {
             if (!this.ModelState.IsValid)

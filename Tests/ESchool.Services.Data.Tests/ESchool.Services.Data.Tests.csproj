@@ -29,6 +29,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\ESchool.Data\ESchool.Data.csproj" />
     <ProjectReference Include="..\..\Services\ESchool.Services.Data\ESchool.Services.Data.csproj" />
+    <ProjectReference Include="..\..\Web\ESchool.Web\ESchool.Web.csproj" />
   </ItemGroup>
 
 </Project>

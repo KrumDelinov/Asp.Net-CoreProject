@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Reflection;
     using System.Threading.Tasks;
+
     using ESchool.Data.Models;
     using ESchool.Services.Data;
     using ESchool.Services.Data.Contracts;
@@ -162,6 +163,5 @@
             return this.RedirectToAction(nameof(this.All));
         }
 
-     
     }
 }

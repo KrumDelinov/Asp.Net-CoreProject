@@ -10,7 +10,16 @@
             <li class="nav-item">
                 <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @(this.User.Identity.Name)!</a>
             </li>
-            if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+            if (this.User.IsInRole(GlobalConstants.AdministratorRoleName) && this.User.IsInRole(GlobalConstants.TeacherRoleName))
+            {
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="Administration" asp-controller="Dashboard" asp-action="Index" title="Admin">Admin</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="Teachers" asp-controller="Dashboard" asp-action="Index" title="Teachers">Teacher</a>
+                </li>
+            }
+            else if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
             {
                 <li class="nav-item">
                     <a class="nav-link text-dark" asp-area="Administration" asp-controller="Dashboard" asp-action="Index" title="Admin">Admin</a>

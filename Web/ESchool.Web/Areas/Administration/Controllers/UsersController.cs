@@ -1,14 +1,10 @@
 ﻿namespace ESchool.Web.Areas.Administration.Controllers
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using ESchool.Data;
-    using ESchool.Data.Common.Models;
-    using ESchool.Data.Common.Repositories;
+
     using ESchool.Data.Models;
-    using ESchool.Data.Repositories;
     using ESchool.Web.ViewModels.Administration.Users;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -17,17 +13,14 @@
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly RoleManager<ApplicationRole> roleManager;
-        private readonly ApplicationDbContext context;
 
         public UsersController
             (
                 UserManager<ApplicationUser> userManager,
-                RoleManager<ApplicationRole> roleManager,
-                ApplicationDbContext context)
+                RoleManager<ApplicationRole> roleManager)
         {
             this.userManager = userManager;
             this.roleManager = roleManager;
-            this.context = context;
         }
 
         public IActionResult AllRoles()
@@ -40,8 +33,6 @@
         [HttpGet]
         public async Task<IActionResult> EditUserRoles(string id)
         {
-            var user1 = this.context.Users.FindAsync(id);
-            var rolles = this.context.Roles.ToList();
 
             var user = await this.userManager.FindByIdAsync(id);
 
@@ -51,23 +42,15 @@
 
             var userRoles = new List<RoleViewModel>();
 
-            foreach (var role in rolles)
+            foreach (var role in allRoles)
             {
-                bool isInRole = this.context.UserRoles.Any(x => x.RoleId == role.Id);
+
                 var roleModel = new RoleViewModel
                 {
                     Id = role.Id,
                     Name = role.Name,
                 };
 
-                if (isInRole)
-                {
-                    roleModel.IsSelected = true;
-                }
-                else
-                {
-                    roleModel.IsSelected = false;
-                }
 
                 userRoles.Add(roleModel);
             }
@@ -91,7 +74,7 @@
                 return this.View(model);
             }
 
-            return this.View(NotFound());
+            return this.View(this.NotFound());
 
         }
 
@@ -148,8 +131,6 @@
             viewModel.Roles = listRoles;
             return this.View(viewModel);
         }
-
-    
 
         public async Task<IActionResult> EditRole(string id)
         {
@@ -214,6 +195,178 @@
             return this.RedirectToAction("AllRoles");
         }
 
-     
+        public async Task<IActionResult> UserDetailsAsync(string id)
+        {
+            var user = await this.userManager.FindByIdAsync(id);
+            var roles = await this.userManager.GetRolesAsync(user);
+            var allRoles = this.roleManager.Roles;
+            var userRoles = new List<RolesDropDownViewModel>();
+
+            foreach (var role in allRoles)
+            {
+                bool isInRole = roles.Contains(role.Name);
+                if (isInRole)
+                {
+                    continue;
+                }
+                else
+                {
+                    var roleModel = new RolesDropDownViewModel
+                    {
+                        Id = role.Id,
+                        Name = role.Name,
+                    };
+                    userRoles.Add(roleModel);
+                }
+
+            }
+
+            var viewModel = new EditUserRolesViewModel
+            {
+                UserName = user.UserName,
+                UserId = user.Id,
+                Roles = userRoles,
+
+            };
+
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UserDetailsAsync(EditUserRolesViewModel model)
+        {
+            var user = await this.userManager.FindByIdAsync(model.UserId);
+            var roles = await this.userManager.GetRolesAsync(user);
+            var allRoles = this.roleManager.Roles;
+
+            var userRoles = new List<RolesDropDownViewModel>();
+
+            foreach (var role in allRoles)
+            {
+                var roleModel = new RolesDropDownViewModel
+                {
+                    Id = role.Id,
+                    Name = role.Name,
+                };
+                userRoles.Add(roleModel);
+            }
+
+            var viewModel = new EditUserRolesViewModel
+            {
+                UserName = user.UserName,
+                UserId = user.Id,
+                Roles = userRoles,
+
+            };
+
+            var roleName = allRoles
+           .Where(n => n.Id == model.RoleId)
+           .Select(x => x.Name)
+           .FirstOrDefault();
+
+            var result = await this.userManager.AddToRoleAsync(user, roleName);
+
+            if (result.Succeeded)
+            {
+                return this.RedirectToAction("AllUsers");
+            }
+            else
+            {
+                return this.View(viewModel);
+            }
+        }
+
+        public async Task<IActionResult> RemoveUserFromRole(string id)
+        {
+            var user = await this.userManager.FindByIdAsync(id);
+            var roles = await this.userManager.GetRolesAsync(user);
+            var allRoles = this.roleManager.Roles;
+            var userRoles = new List<RolesDropDownViewModel>();
+
+            foreach (var role in allRoles)
+            {
+                bool isInRole = roles.Contains(role.Name);
+
+                if (!isInRole)
+                {
+                    continue;
+                }
+                else
+                {
+                    var roleModel = new RolesDropDownViewModel
+                    {
+                        Id = role.Id,
+                        Name = role.Name,
+                    };
+                    userRoles.Add(roleModel);
+                }
+
+            }
+
+            var viewModel = new EditUserRolesViewModel
+            {
+                UserName = user.UserName,
+                UserId = user.Id,
+                Roles = userRoles,
+
+            };
+
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveUserFromRole(EditUserRolesViewModel model)
+        {
+            var user = await this.userManager.FindByIdAsync(model.UserId);
+            var roles = await this.userManager.GetRolesAsync(user);
+            var allRoles = this.roleManager.Roles;
+
+            var userRoles = new List<RolesDropDownViewModel>();
+
+            foreach (var role in allRoles)
+            {
+                bool isInRole = roles.Contains(role.Name);
+
+                if (!isInRole)
+                {
+                    continue;
+                }
+                else
+                {
+                    var roleModel = new RolesDropDownViewModel
+                    {
+                        Id = role.Id,
+                        Name = role.Name,
+                    };
+                    userRoles.Add(roleModel);
+                }
+
+            }
+
+            var viewModel = new EditUserRolesViewModel
+            {
+                UserName = user.UserName,
+                UserId = user.Id,
+                Roles = userRoles,
+
+            };
+
+            var roleName = allRoles
+           .Where(n => n.Id == model.RoleId)
+           .Select(x => x.Name)
+           .FirstOrDefault();
+
+            var result = await this.userManager.RemoveFromRoleAsync(user, roleName);
+
+            if (result.Succeeded)
+            {
+                return this.RedirectToAction("AllUsers");
+            }
+            else
+            {
+                return this.View(viewModel);
+            }
+        }
+
     }
 }

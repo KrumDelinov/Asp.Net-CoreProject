@@ -53,30 +53,18 @@
                                     @(roles = string.Join(" | ", item.Roles.Select(x => x.Name)))
                                 </td>
                                 <td>
-                                    
-                                    @*<form asp-action="EditUserRoles" method="post">
-                                        <input type="hidden" asp-for="@item.UserId" />
-                                        <div class="dropdown mb-4">
-                                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Add To Role
-                                            </button>
-                                            <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
-                                                @foreach (var role in Model.Roles.Where(x => item.Roles.Any(n => n.Name != x.Name)))
-                                                {
-                                                 
-                                                    <a class="dropdown-item" asp-controller="Users" asp-action="EditUserRoles" asp-route-id="roleId">@role.Name</a>
-                                                }
-                                            </div>
-                                        </div>
 
-                                    </form>*@
-
+                                    <div class="btn">
+                                        <a asp-action="UserDetails" asp-route-id="@item.UserId" class="btn btn-primary" style="width:auto">Add</a>
+                                    </div>
 
                                 </td>
                                 <td>
-                                   
-                                    <a asp-controller="Users" asp-action="EditUserRoles"  asp-route-id="@item.UserId">Edit</a>
-                                  
+
+                                    <div class="btn">
+                                        <a asp-action="RemoveUserFromRole" asp-route-id="@item.UserId" class="btn btn-danger" style="width:auto">Remove</a>
+                                    </div>
+
                                 </td>
                             </tr>
                             }
